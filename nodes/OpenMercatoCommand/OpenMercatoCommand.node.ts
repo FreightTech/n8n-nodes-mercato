@@ -25,7 +25,7 @@ export class OpenMercatoCommand implements INodeType {
 		group: ['output'],
 		version: 1,
 		description: 'Send commands to OpenMercato via NATS JetStream',
-		subtitle: '={{$parameter["command"]}}',
+		subtitle: '={{$parameter["resource"] === "template" ? "Get Template" : $parameter["command"]}}',
 		defaults: {
 			name: 'OpenMercato Command',
 		},
@@ -39,9 +39,34 @@ export class OpenMercatoCommand implements INodeType {
 		],
 		properties: [
 			{
+				displayName: 'Operation',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Execute Command',
+						value: 'command',
+						description: 'Send a command to OpenMercato via JetStream',
+					},
+					{
+						name: 'Get Template',
+						value: 'template',
+						description: 'Retrieve a message template for a command',
+					},
+				],
+				default: 'command',
+			},
+			// Execute Command fields
+			{
 				displayName: 'Command',
 				name: 'command',
 				type: 'options',
+				displayOptions: {
+					show: {
+						resource: ['command'],
+					},
+				},
 				options: loadCommandOptions(),
 				default: '',
 				required: true,
@@ -51,25 +76,80 @@ export class OpenMercatoCommand implements INodeType {
 				displayName: 'Command Input',
 				name: 'commandInput',
 				type: 'json',
+				displayOptions: {
+					show: {
+						resource: ['command'],
+					},
+				},
 				default: '={{ $json }}',
 				typeOptions: {
 					rows: 10,
 				},
 				description: 'Command input payload (will be wrapped with tenantId and organizationId)',
-				hint: 'Template available based on command selection',
+				hint: 'Use "Get Template" operation to see example payload for this command',
 			},
 			{
 				displayName: 'Organization ID',
 				name: 'organizationId',
 				type: 'string',
+				displayOptions: {
+					show: {
+						resource: ['command'],
+					},
+				},
 				default: '',
 				placeholder: 'Override default from credentials',
 				description: 'Organization ID for this command (optional if set in credentials)',
 			},
+			// Get Template fields
+			{
+				displayName: 'Command',
+				name: 'templateCommand',
+				type: 'options',
+				displayOptions: {
+					show: {
+						resource: ['template'],
+					},
+				},
+				options: loadCommandOptions(),
+				default: '',
+				required: true,
+				description: 'Select a command to get its template',
+			},
+			{
+				displayName: 'Template Format',
+				name: 'templateFormat',
+				type: 'options',
+				displayOptions: {
+					show: {
+						resource: ['template'],
+					},
+				},
+				options: [
+					{
+						name: 'Input Only',
+						value: 'input',
+						description: 'Just the input payload (copy to Command Input field)',
+					},
+					{
+						name: 'Full Envelope',
+						value: 'full',
+						description: 'Complete message with tenantId and organizationId wrapper',
+					},
+				],
+				default: 'input',
+				description: 'Which format to return',
+			},
+			// Execute Command options
 			{
 				displayName: 'Options',
 				name: 'options',
 				type: 'collection',
+				displayOptions: {
+					show: {
+						resource: ['command'],
+					},
+				},
 				placeholder: 'Add Option',
 				default: {},
 				options: [
@@ -81,14 +161,6 @@ export class OpenMercatoCommand implements INodeType {
 						placeholder: 'inbound.catalog.products.create',
 						description: 'Override the auto-generated NATS subject (advanced)',
 					},
-					{
-						displayName: 'Show Template',
-						name: 'showTemplate',
-						type: 'notice',
-						default: '',
-						description:
-							'Template will be shown in the command input field based on your selection',
-					},
 				],
 			},
 		],
@@ -97,6 +169,55 @@ export class OpenMercatoCommand implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
+		const resource = this.getNodeParameter('resource', 0) as string;
+
+		// Handle template retrieval (no NATS connection needed)
+		if (resource === 'template') {
+			for (let i = 0; i < items.length; i++) {
+				const commandId = this.getNodeParameter('templateCommand', i) as string;
+				const templateFormat = this.getNodeParameter('templateFormat', i) as string;
+
+				// Skip separator items
+				if (commandId.startsWith('__')) {
+					continue;
+				}
+
+				const template = getCommandTemplate(commandId);
+				const credentials = await this.getCredentials('openMercatoApi');
+				const tenantId = credentials.tenantId as string;
+				const defaultOrgId = credentials.organizationId as string;
+
+				let output: any;
+				if (templateFormat === 'full') {
+					// Full envelope format
+					output = {
+						input: template,
+						tenantId: tenantId || '00000000-0000-0000-0000-000000000000',
+						organizationId: defaultOrgId || '00000000-0000-0000-0000-000000000000',
+					};
+				} else {
+					// Just the input payload
+					output = template;
+				}
+
+				returnData.push({
+					json: {
+						commandId,
+						template: output,
+						subject: generateCommandSubject(commandId),
+						note:
+							templateFormat === 'input'
+								? 'Copy the template object above to use in Command Input field'
+								: 'This is the complete message envelope that will be sent',
+					},
+					pairedItem: { item: i },
+				});
+			}
+
+			return [returnData];
+		}
+
+		// Handle command execution
 		const credentials = await this.getCredentials('openMercatoApi');
 		const nodeLogger = new NodeLogger(this.logger, this.getNode());
 
