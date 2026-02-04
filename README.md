@@ -176,7 +176,7 @@ OpenMercato Event Consumer → Process Data → Save to Database
 
 ```json
 {
-	"event": "acme-corp.catalog.product.created",
+	"event": "events.acme-corp.catalog.product.created",
 	"data": {
 		"id": "uuid...",
 		"title": "New Product",
@@ -189,7 +189,7 @@ OpenMercato Event Consumer → Process Data → Save to Database
 		"content-type": "application/json"
 	},
 	"metadata": {
-		"subject": "acme-corp.catalog.product.created",
+		"subject": "events.acme-corp.catalog.product.created",
 		"tenantId": "acme-corp",
 		"eventId": "catalog.product.created",
 		"receivedAt": "2024-02-04T10:00:00.000Z"
@@ -234,7 +234,7 @@ Webhook → Transform Data → OpenMercato Event Publisher → Success Response
 {
 	"success": true,
 	"eventId": "custom.integration.completed",
-	"subject": "acme-corp.custom.integration.completed",
+	"subject": "events.acme-corp.custom.integration.completed",
 	"timestamp": "2024-02-04T10:00:00.000Z"
 }
 ```
@@ -255,15 +255,15 @@ inbound.auth.users.delete
 
 ### Events
 
-Events are published and consumed with tenant-scoping:
+Events are published and consumed with tenant-scoping and the `events.` prefix:
 
 ```
-{tenantId}.{eventId}
+events.{tenantId}.{eventId}
 
 Examples:
-  acme-corp.catalog.product.created
-  acme-corp.sales.order.completed
-  uuid-123.custom.integration.event
+  events.acme-corp.catalog.product.created
+  events.acme-corp.sales.order.completed
+  events.uuid-123.custom.integration.event
 ```
 
 ---

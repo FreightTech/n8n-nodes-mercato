@@ -175,23 +175,37 @@ export function generateCommandSubject(commandId: string): string {
 }
 
 /**
- * Generate event subject with tenant prefix
+ * Generate event subject with events prefix and tenant scope
+ * Pattern: events.{tenantId}.{eventId}
+ * Example: events.acme-corp.catalog.product.created
  */
 export function generateEventSubject(tenantId: string, eventId: string): string {
-	return `${tenantId}.${eventId}`;
+	return `events.${tenantId}.${eventId}`;
 }
 
 /**
- * Parse tenant-prefixed event subject to extract event ID
+ * Parse event subject to extract tenant ID and event ID
+ * Expected format: events.{tenantId}.{eventId}
+ * Example: events.acme-corp.catalog.product.created
+ *
+ * Also handles legacy format: {tenantId}.{eventId} (for backward compatibility during parsing)
  */
 export function parseEventSubject(subject: string): { tenantId: string; eventId: string } | null {
 	const parts = subject.split('.');
-	if (parts.length < 2) {
-		return null;
+
+	// Handle new format: events.{tenantId}.{eventId}
+	if (parts.length >= 3 && parts[0] === 'events') {
+		const tenantId = parts[1];
+		const eventId = parts.slice(2).join('.');
+		return { tenantId, eventId };
 	}
 
-	const tenantId = parts[0];
-	const eventId = parts.slice(1).join('.');
+	// Handle legacy format: {tenantId}.{eventId} (fallback)
+	if (parts.length >= 2) {
+		const tenantId = parts[0];
+		const eventId = parts.slice(1).join('.');
+		return { tenantId, eventId };
+	}
 
-	return { tenantId, eventId };
+	return null;
 }

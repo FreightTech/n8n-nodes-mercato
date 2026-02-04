@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-openmercato",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "OpenMercato command and event integration nodes for n8n workflow automation",
 	"main": "dist/index.js",
 	"repository": {

@@ -66,8 +66,8 @@ npm run refresh:metadata -- --path /path/to/openmercato
 **Events:**
 
 - Published/consumed via Core NATS
-- Tenant-scoped: `{tenantId}.{eventId}`
-- Example: `acme-corp.catalog.product.created`
+- Tenant-scoped with events prefix: `events.{tenantId}.{eventId}`
+- Example: `events.acme-corp.catalog.product.created`
 
 ### 2. Node Development
 
@@ -104,7 +104,7 @@ The `OpenMercatoApi` credentials require:
 
 ```json
 {
-	"event": "acme-corp.catalog.product.created",
+	"event": "events.acme-corp.catalog.product.created",
 	"data": {
 		/* payload */
 	},

@@ -45,7 +45,7 @@ export class OpenMercatoEventConsumer implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'Select from List',
+						name: 'Select From List',
 						value: 'predefined',
 						description: 'Choose from discovered OpenMercato events',
 					},
@@ -83,7 +83,7 @@ export class OpenMercatoEventConsumer implements INodeType {
 				default: '',
 				placeholder: 'catalog.> or sales.orders.*',
 				description:
-					'NATS subject pattern (wildcards supported). Will be automatically prefixed with your tenant ID.',
+					'NATS subject pattern (wildcards supported). Will be automatically prefixed with events.{tenantId}.',
 				hint: 'Use * for single token wildcard, > for multi-token wildcard',
 			},
 			{
@@ -209,6 +209,8 @@ export class OpenMercatoEventConsumer implements INodeType {
 			(async () => {
 				for await (const msg of subscription) {
 					try {
+						nodeLogger.info(`Received message on subject: ${msg.subject}`);
+
 						// Parse message data
 						let data: any;
 						try {

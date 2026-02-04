@@ -41,7 +41,7 @@ export class OpenMercatoEventPublisher implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'Select from List',
+						name: 'Select From List',
 						value: 'predefined',
 						description: 'Choose from discovered OpenMercato events',
 					},
@@ -78,7 +78,7 @@ export class OpenMercatoEventPublisher implements INodeType {
 				},
 				default: '',
 				placeholder: 'custom.integration.completed',
-				description: 'Custom event identifier (will be prefixed with tenant ID)',
+				description: 'Custom event identifier (will be prefixed with events.{tenantId})',
 			},
 			{
 				displayName: 'Event Data',
