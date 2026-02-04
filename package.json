@@ -1,0 +1,88 @@
+{
+	"name": "n8n-nodes-openmercato",
+	"version": "0.1.0",
+	"description": "OpenMercato command and event integration nodes for n8n workflow automation",
+	"main": "dist/index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/freighttech/n8n-nodes-openmercato.git"
+	},
+	"bugs": {
+		"url": "https://github.com/freighttech/n8n-nodes-openmercato/issues"
+	},
+	"homepage": "https://github.com/freighttech/n8n-nodes-openmercato",
+	"scripts": {
+		"lint": "eslint .",
+		"lintfix": "eslint . --fix",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage",
+		"build": "node esbuild.config.mjs && npx rimraf dist && tsc && gulp build:icons build:bundle",
+		"dev": "tsc --watch",
+		"format": "prettier 'credentials/**/*.ts' 'nodes/**/*.ts' 'utils/**/*.ts' 'scripts/**/*.ts' --write",
+		"discover": "tsx scripts/discover-commands-events.ts",
+		"generate:templates": "tsx scripts/generate-templates.ts",
+		"refresh:metadata": "npm run discover && npm run generate:templates",
+		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js"
+	},
+	"keywords": [
+		"n8n",
+		"openmercato",
+		"commands",
+		"events",
+		"messaging",
+		"nats",
+		"jetstream",
+		"workflow",
+		"automation",
+		"n8n-community-node-package"
+	],
+	"author": "FreightTech",
+	"license": "MIT",
+	"type": "commonjs",
+	"files": [
+		"dist/**/*"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/OpenMercatoApi/OpenMercatoApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/OpenMercatoCommand/OpenMercatoCommand.node.js",
+			"dist/nodes/OpenMercatoEventConsumer/OpenMercatoEventConsumer.node.js",
+			"dist/nodes/OpenMercatoEventPublisher/OpenMercatoEventPublisher.node.js"
+		]
+	},
+	"devDependencies": {
+		"@nats-io/jetstream": "^3.0.2",
+		"@nats-io/kv": "^3.0.2",
+		"@nats-io/nats-core": "^3.0.2",
+		"@nats-io/obj": "^3.0.2",
+		"@nats-io/transport-node": "^3.1.0",
+		"@rollup/plugin-commonjs": "^28.0.5",
+		"@rollup/plugin-json": "^6.1.0",
+		"@rollup/plugin-node-resolve": "^16.0.1",
+		"@rollup/plugin-replace": "^6.0.2",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/plugin-typescript": "^12.1.2",
+		"@types/jest": "^29.5.14",
+		"@types/node": "^20.10.0",
+		"@typescript-eslint/parser": "~8.32.0",
+		"esbuild": "^0.25.5",
+		"eslint": "^8.57.0",
+		"eslint-plugin-n8n-nodes-base": "^1.16.3",
+		"glob": "^10.3.10",
+		"gulp": "^5.0.1",
+		"jest": "^30.0.0",
+		"n8n-core": "^1.82.0",
+		"prettier": "^3.5.3",
+		"ts-jest": "^29.4.0",
+		"tsx": "^4.7.0",
+		"typescript": "^5.8.2",
+		"zod-to-json-schema": "^3.22.0"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
