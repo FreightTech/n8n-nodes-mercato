@@ -55,20 +55,20 @@ export class OpenMercatoCommand implements INodeType {
 				hint: 'Enter payload as JSON',
 			},
 			{
-				displayName: 'Organization ID',
-				name: 'organizationId',
-				type: 'string',
-				default: '',
-				placeholder: 'Override default from credentials',
-				description: 'Organization ID for this command (optional if set in credentials)',
-			},
-			{
 				displayName: 'Options',
 				name: 'options',
 				type: 'collection',
 				placeholder: 'Add Option',
 				default: {},
 				options: [
+					{
+						displayName: 'Organization ID',
+						name: 'organizationId',
+						type: 'string',
+						default: '',
+						placeholder: 'Override default from credentials',
+						description: 'Organization ID for this command (optional if set in credentials)',
+					},
 					{
 						displayName: 'Subject Override',
 						name: 'subjectOverride',
@@ -111,9 +111,8 @@ export class OpenMercatoCommand implements INodeType {
 					}
 
 					const commandInput = this.getNodeParameter('commandInput', i);
-					const organizationId =
-						(this.getNodeParameter('organizationId', i) as string) || defaultOrgId;
 					const options = this.getNodeParameter('options', i, {}) as any;
+					const organizationId = options.organizationId || defaultOrgId;
 
 					// Build subject: inbound.{commandId}
 					const subject = options.subjectOverride || generateCommandSubject(commandId);

@@ -104,7 +104,7 @@ export function loadCommandOptions(): INodePropertyOptions[] {
 			options.push({
 				name: cmd.label,
 				value: cmd.id,
-				description: cmd.description || `${cmd.action} ${cmd.entity}`,
+				description: cmd.id,
 			});
 		}
 	}
@@ -159,7 +159,7 @@ export function loadEventOptions(): INodePropertyOptions[] {
 			options.push({
 				name: evt.label,
 				value: evt.id,
-				description: `${evt.category} - ${evt.entity}`,
+				description: evt.id,
 			});
 		}
 	}
