@@ -3,8 +3,6 @@ import type {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
-	ILoadOptionsFunctions,
-	INodePropertyOptions,
 } from 'n8n-workflow';
 import { NodeOperationError, NodeConnectionTypes } from 'n8n-workflow';
 import { NatsConnection, jetstream, headers as natsHeaders } from '../../bundled/nats-bundled';
@@ -13,41 +11,9 @@ import {
 	closeOpenMercatoConnection,
 } from '../../utils/OpenMercatoConnection';
 import { NodeLogger } from '../../utils/NodeLogger';
-import {
-	loadCommandOptions,
-	generateCommandSubject,
-	getCommandTemplate,
-} from '../../utils/MetadataLoader';
+import { loadCommandOptions, generateCommandSubject } from '../../utils/MetadataLoader';
 
 export class OpenMercatoCommand implements INodeType {
-	methods = {
-		loadOptions: {
-			async getCommandTemplate(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-				const commandId = this.getCurrentNodeParameter('command') as string;
-
-				if (!commandId || commandId.startsWith('__')) {
-					return [
-						{
-							name: '(Select a command first)',
-							value: '{}',
-						},
-					];
-				}
-
-				const template = getCommandTemplate(commandId);
-				const templateJson = JSON.stringify(template, null, 2);
-
-				return [
-					{
-						name: `Load template for ${commandId}`,
-						value: templateJson,
-						description: 'Click to load this template into Command Input',
-					},
-				];
-			},
-		},
-	};
-
 	description: INodeTypeDescription = {
 		displayName: 'OpenMercato Command',
 		name: 'openMercatoCommand',
@@ -78,28 +44,6 @@ export class OpenMercatoCommand implements INodeType {
 				description: 'Select a command to execute',
 			},
 			{
-				displayName: 'Load Template',
-				name: 'loadTemplate',
-				type: 'options',
-				typeOptions: {
-					loadOptionsMethod: 'getCommandTemplate',
-				},
-				default: '',
-				description: 'Click to load template for the selected command into Command Input field',
-				hint: 'Select this to populate Command Input with example payload',
-			},
-			{
-				displayName: 'Command Input',
-				name: 'commandInput',
-				type: 'json',
-				default: '={{ $parameter["loadTemplate"] || $json }}',
-				typeOptions: {
-					rows: 10,
-				},
-				description: 'Command input payload (will be wrapped with tenantId and organizationId)',
-				hint: 'Use "Load Template" above to get example payload, then modify as needed',
-			},
-			{
 				displayName: 'Command Input',
 				name: 'commandInput',
 				type: 'json',
@@ -108,7 +52,7 @@ export class OpenMercatoCommand implements INodeType {
 					rows: 10,
 				},
 				description: 'Command input payload (will be wrapped with tenantId and organizationId)',
-				hint: 'Enable "Show Template" in Options below to see an example',
+				hint: 'Enter payload as JSON',
 			},
 			{
 				displayName: 'Organization ID',

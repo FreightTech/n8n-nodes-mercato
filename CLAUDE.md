@@ -24,12 +24,10 @@ n8n-nodes-openmercato/
 │   ├── OpenMercatoConnection.ts # NATS connection management
 │   └── NodeLogger.ts            # Logging wrapper
 ├── scripts/
-│   ├── discover-commands-events.ts # Scan OpenMercato for commands/events
-│   └── generate-templates.ts    # Generate message templates
+│   └── discover-commands-events.ts # Scan OpenMercato for commands/events
 ├── src/generated/               # Auto-generated metadata
 │   ├── commands.json
-│   ├── events.json
-│   └── templates.json
+│   └── events.json
 └── icons/
     └── openmercato.svg
 ```
@@ -51,11 +49,8 @@ npm run test         # Run tests
 # Discover commands and events from OpenMercato
 npm run discover -- --path /path/to/openmercato
 
-# Generate templates
-npm run generate:templates
-
-# Run both
-npm run refresh:metadata
+# Alias for discover
+npm run refresh:metadata -- --path /path/to/openmercato
 ```
 
 ## Important Conventions
@@ -124,10 +119,9 @@ The `OpenMercatoApi` credentials require:
 
 Commands and events are auto-discovered from OpenMercato:
 
-- Run `npm run refresh:metadata` after OpenMercato changes
+- Run `npm run refresh:metadata -- --path /path/to/openmercato` after OpenMercato changes
 - Scans TypeScript source files for `registerCommand()` calls
 - Extracts event definitions from `events.ts` files
-- Generates basic message templates
 
 ## Common Tasks
 
@@ -136,11 +130,6 @@ Commands and events are auto-discovered from OpenMercato:
 1. No code changes needed
 2. Run: `npm run refresh:metadata -- --path /path/to/openmercato`
 3. The command appears in dropdown automatically
-
-### Updating Message Templates
-
-1. Edit `scripts/generate-templates.ts`
-2. Re-run: `npm run generate:templates`
 
 ### Testing Locally
 

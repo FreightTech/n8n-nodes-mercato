@@ -1,8 +1,8 @@
 /**
  * Metadata Loader
  *
- * Loads OpenMercato commands, events, and templates from generated JSON files.
- * Used by n8n nodes to populate dropdowns and provide message templates.
+ * Loads OpenMercato commands and events from generated JSON files.
+ * Used by n8n nodes to populate dropdowns.
  */
 
 import { INodePropertyOptions } from 'n8n-workflow';
@@ -12,8 +12,6 @@ import { INodePropertyOptions } from 'n8n-workflow';
 import commandsData from '../src/generated/commands.json';
 // @ts-ignore
 import eventsData from '../src/generated/events.json';
-// @ts-ignore
-import templatesData from '../src/generated/templates.json';
 
 export interface CommandDefinition {
 	id: string;
@@ -57,32 +55,6 @@ export function loadEvents(): EventDefinition[] {
 		console.warn('Failed to load events metadata:', error);
 		return [];
 	}
-}
-
-/**
- * Load message templates for commands
- */
-export function loadTemplates(): Record<string, any> {
-	try {
-		return templatesData as Record<string, any>;
-	} catch (error) {
-		console.warn('Failed to load templates metadata:', error);
-		return {};
-	}
-}
-
-/**
- * Get template for a specific command
- */
-export function getCommandTemplate(commandId: string): any {
-	const templates = loadTemplates();
-	return (
-		templates[commandId] || {
-			tenantId: '00000000-0000-0000-0000-000000000000',
-			organizationId: '00000000-0000-0000-0000-000000000000',
-			_comment: 'No template available for this command',
-		}
-	);
 }
 
 /**

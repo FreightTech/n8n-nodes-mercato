@@ -21,8 +21,7 @@
 		"dev": "tsc --watch",
 		"format": "prettier 'credentials/**/*.ts' 'nodes/**/*.ts' 'utils/**/*.ts' 'scripts/**/*.ts' --write",
 		"discover": "tsx scripts/discover-commands-events.ts",
-		"generate:templates": "tsx scripts/generate-templates.ts",
-		"refresh:metadata": "npm run discover && npm run generate:templates",
+		"refresh:metadata": "npm run discover",
 		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js"
 	},
 	"keywords": [
