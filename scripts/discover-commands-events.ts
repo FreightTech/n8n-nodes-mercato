@@ -61,7 +61,8 @@ console.log(`🔍 Discovering commands and events in: ${OPENMERCATO_PATH}`);
 async function discoverCommands(): Promise<CommandDefinition[]> {
 	console.log('\n📦 Scanning for commands...');
 
-	const commandFiles = await glob('packages/core/src/modules/*/commands/*.ts', {
+	// Scan all packages for command files
+	const commandFiles = await glob('packages/*/src/modules/*/commands/*.ts', {
 		cwd: OPENMERCATO_PATH,
 		ignore: ['**/__tests__/**', '**/*.test.ts', '**/node_modules/**'],
 	});
@@ -93,9 +94,10 @@ async function discoverCommands(): Promise<CommandDefinition[]> {
 			//   id: 'catalog.products.create',
 			//   ...
 			// }
+			// More flexible regex to handle various formatting styles
 			const commandDefRegex = new RegExp(
-				`const\\s+${commandVarName}[^{]*{[^}]*id:\\s*['"]([^'"]+)['"]`,
-				's',
+				`const\\s+${commandVarName}[^{]*\\{[\\s\\S]*?id:\\s*['"]([^'"]+)['"]`,
+				'm',
 			);
 			const commandDefMatch = content.match(commandDefRegex);
 
@@ -117,6 +119,9 @@ async function discoverCommands(): Promise<CommandDefinition[]> {
 						label,
 					});
 				}
+			} else {
+				// Debug: log when we can't find the definition
+				console.log(`  ⚠️  Could not find definition for ${commandVarName} in ${file}`);
 			}
 		}
 	}
@@ -131,7 +136,8 @@ async function discoverCommands(): Promise<CommandDefinition[]> {
 async function discoverEvents(): Promise<EventDefinition[]> {
 	console.log('\n📡 Scanning for events...');
 
-	const eventFiles = await glob('packages/core/src/modules/*/events.ts', {
+	// Scan all packages for event files
+	const eventFiles = await glob('packages/*/src/modules/*/events.ts', {
 		cwd: OPENMERCATO_PATH,
 		ignore: ['**/node_modules/**'],
 	});

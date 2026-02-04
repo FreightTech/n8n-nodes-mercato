@@ -5,7 +5,7 @@ import type {
 	INodeTypeDescription,
 } from 'n8n-workflow';
 import { NodeOperationError, NodeConnectionTypes } from 'n8n-workflow';
-import { NatsConnection, jetstream, headers as natsHeaders } from '../../bundled/nats-bundled';
+import { NatsConnection, headers as natsHeaders } from '../../bundled/nats-bundled';
 import {
 	createOpenMercatoConnection,
 	closeOpenMercatoConnection,
@@ -20,7 +20,7 @@ export class OpenMercatoCommand implements INodeType {
 		icon: 'file:openmercato.svg',
 		group: ['output'],
 		version: 1,
-		description: 'Send commands to OpenMercato via NATS JetStream',
+		description: 'Execute commands in OpenMercato via NATS request-reply',
 		subtitle: '={{$parameter["command"]}}',
 		defaults: {
 			name: 'OpenMercato Command',
@@ -99,7 +99,6 @@ export class OpenMercatoCommand implements INodeType {
 
 		try {
 			nc = await createOpenMercatoConnection(credentials, nodeLogger);
-			const js = jetstream(nc);
 
 			for (let i = 0; i < items.length; i++) {
 				try {
@@ -128,26 +127,69 @@ export class OpenMercatoCommand implements INodeType {
 					const msgHeaders = natsHeaders();
 					msgHeaders.set('x-source', 'open-mercato-n8n');
 
-					// Publish to JetStream INBOUND_COMMANDS stream
-					const data = JSON.stringify(payload);
-					const ack = await js.publish(subject, data, { headers: msgHeaders });
+					// Log what we're sending
+					nodeLogger.info(`Sending command to subject: ${subject}`);
+					nodeLogger.debug('Payload:', payload);
 
-					returnData.push({
-						json: {
-							success: true,
-							commandId,
-							subject,
-							sequence: Number(ack.seq),
-							stream: ack.stream,
-							duplicate: ack.duplicate || false,
-							timestamp: new Date().toISOString(),
-						},
-						pairedItem: { item: i },
+					// Execute command via request-reply (synchronous)
+					const data = JSON.stringify(payload);
+					const response = await nc.request(subject, data, {
+						timeout: 30000,
+						headers: msgHeaders,
 					});
+
+					// Parse response
+					const result = JSON.parse(new TextDecoder().decode(response.data));
+					nodeLogger.debug('Received response:', result);
+
+					if (result.success) {
+						returnData.push({
+							json: {
+								success: true,
+								commandId,
+								subject,
+								result: result.result,
+								timestamp: new Date().toISOString(),
+							},
+							pairedItem: { item: i },
+						});
+					} else {
+						// Command failed - log full response for debugging
+						nodeLogger.error('Command failed with response:', result);
+
+						// Extract error message - prioritize errorMsg (string) over error (object)
+						const errorMessage =
+							result.errorMsg ||
+							(typeof result.error === 'string' ? result.error : result.error?.message) ||
+							result.message ||
+							JSON.stringify(result);
+
+						if (this.continueOnFail()) {
+							returnData.push({
+								json: {
+									success: false,
+									error: result.error,
+									errorMsg: result.errorMsg,
+									code: result.code,
+									fullResponse: result,
+									commandId,
+									subject,
+								},
+								pairedItem: { item: i },
+							});
+						} else {
+							throw new NodeOperationError(
+								this.getNode(),
+								`Command ${commandId} failed: ${errorMessage}`,
+								{ itemIndex: i },
+							);
+						}
+					}
 				} catch (error: any) {
 					if (this.continueOnFail()) {
 						returnData.push({
 							json: {
+								success: false,
 								error: error.message,
 								commandId: this.getNodeParameter('command', i) as string,
 							},
