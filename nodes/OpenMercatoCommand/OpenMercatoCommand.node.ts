@@ -23,13 +23,13 @@ export class OpenMercatoCommand implements INodeType {
 	methods = {
 		loadOptions: {
 			async getCommandTemplate(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-				const commandId = this.getNodeParameter('command', '') as string;
+				const commandId = this.getCurrentNodeParameter('command') as string;
 
 				if (!commandId || commandId.startsWith('__')) {
 					return [
 						{
-							name: 'Select a command first',
-							value: '',
+							name: '(Select a command first)',
+							value: '{}',
 						},
 					];
 				}
@@ -39,9 +39,9 @@ export class OpenMercatoCommand implements INodeType {
 
 				return [
 					{
-						name: 'Copy this template',
+						name: `Load template for ${commandId}`,
 						value: templateJson,
-						description: `Template for ${commandId}`,
+						description: 'Click to load this template into Command Input',
 					},
 				];
 			},
@@ -78,12 +78,26 @@ export class OpenMercatoCommand implements INodeType {
 				description: 'Select a command to execute',
 			},
 			{
-				displayName: 'Template (Click to Expand)',
-				name: 'templateInfo',
-				type: 'notice',
+				displayName: 'Load Template',
+				name: 'loadTemplate',
+				type: 'options',
+				typeOptions: {
+					loadOptionsMethod: 'getCommandTemplate',
+				},
 				default: '',
-				description:
-					'Click "Show Template" in Options below to see an example payload for this command',
+				description: 'Click to load template for the selected command into Command Input field',
+				hint: 'Select this to populate Command Input with example payload',
+			},
+			{
+				displayName: 'Command Input',
+				name: 'commandInput',
+				type: 'json',
+				default: '={{ $parameter["loadTemplate"] || $json }}',
+				typeOptions: {
+					rows: 10,
+				},
+				description: 'Command input payload (will be wrapped with tenantId and organizationId)',
+				hint: 'Use "Load Template" above to get example payload, then modify as needed',
 			},
 			{
 				displayName: 'Command Input',
@@ -111,28 +125,6 @@ export class OpenMercatoCommand implements INodeType {
 				placeholder: 'Add Option',
 				default: {},
 				options: [
-					{
-						displayName: 'Show Template',
-						name: 'showTemplate',
-						type: 'boolean',
-						default: false,
-						description: 'Whether to display the template example below',
-					},
-					{
-						displayName: 'Template',
-						name: 'templateDisplay',
-						type: 'options',
-						displayOptions: {
-							show: {
-								showTemplate: [true],
-							},
-						},
-						typeOptions: {
-							loadOptionsMethod: 'getCommandTemplate',
-						},
-						default: '',
-						description: 'Select to load template, then copy the JSON value',
-					},
 					{
 						displayName: 'Subject Override',
 						name: 'subjectOverride',
