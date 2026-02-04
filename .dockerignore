@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+npm-debug.log
+package-lock.json
+
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+*.md
+!README.md
+DISCOVERY_RESULTS.md
+IMPLEMENTATION_SUMMARY.md
+
+# Build artifacts
+dist
+
+# Tests
+__tests__
+*.test.ts
+jest.config.js
+coverage
+
+# Examples
+examples
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Config files
+.eslintrc.*
+.prettierrc.js
+tsconfig.json
+
+# Misc
+.DS_Store
+*.log
