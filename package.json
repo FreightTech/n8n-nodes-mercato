@@ -17,7 +17,7 @@
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:coverage": "jest --coverage",
-		"build": "node esbuild.config.mjs && npx rimraf dist && tsc && gulp build:icons build:bundle build:package",
+		"build": "node esbuild.config.mjs && npx rimraf dist && tsc && gulp build:icons build:bundle build:package build:nodeicons",
 		"dev": "tsc --watch",
 		"format": "prettier 'credentials/**/*.ts' 'nodes/**/*.ts' 'utils/**/*.ts' 'scripts/**/*.ts' --write",
 		"discover": "tsx scripts/discover-commands-events.ts",
