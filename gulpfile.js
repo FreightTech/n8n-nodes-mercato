@@ -14,8 +14,10 @@ function copyIcons() {
 }
 
 function copyNodeIcons() {
-	// Copy icons from nodes source directories to dist
-	return src('nodes/**/openmercato.svg', { base: 'nodes' }).pipe(dest('dist/nodes'));
+	// Copy icons from nodes and credentials source directories to dist
+	return src(['nodes/**/openmercato.svg', 'credentials/**/openmercato.svg'], { base: '.' }).pipe(
+		dest('dist'),
+	);
 }
 
 function copyBundled() {

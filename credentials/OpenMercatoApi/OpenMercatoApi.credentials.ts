@@ -1,9 +1,10 @@
-import { IAuthenticateGeneric, ICredentialType, INodeProperties } from 'n8n-workflow';
+import { IAuthenticateGeneric, ICredentialType, INodeProperties, Icon } from 'n8n-workflow';
 
 export class OpenMercatoApi implements ICredentialType {
 	name = 'openMercatoApi';
 	displayName = 'OpenMercato API';
 	documentationUrl = 'https://github.com/freighttech/n8n-nodes-openmercato';
+	icon: Icon = 'file:openmercato.svg';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'NATS Server URLs',
