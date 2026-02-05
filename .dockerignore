@@ -1,7 +1,6 @@
 # Dependencies
 node_modules
 npm-debug.log
-package-lock.json
 
 # Git
 .git
@@ -10,7 +9,6 @@ package-lock.json
 
 # Documentation
 *.md
-!README.md
 DISCOVERY_RESULTS.md
 IMPLEMENTATION_SUMMARY.md
 
@@ -33,10 +31,18 @@ examples
 *.swo
 *~
 
-# Config files
+# Config files not needed for build
 .eslintrc.*
 .prettierrc.js
-tsconfig.json
+eslint.config.js
+
+# Scripts not needed for build
+scripts/
+
+# Docker files
+Dockerfile
+docker-compose.yml
+docker/
 
 # Misc
 .DS_Store
