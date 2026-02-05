@@ -30,6 +30,30 @@ function copyBundled() {
 function copyPackageJson() {
 	const packageSource = path.resolve('package.json');
 	const packageDestination = path.resolve('dist');
+	const { Transform } = require('stream');
 
-	return src(packageSource).pipe(dest(packageDestination));
+	// Strip "dist/" prefix from paths so the package works when dist/ IS the root
+	const stripDistPrefix = new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				const pkg = JSON.parse(file.contents.toString());
+				if (pkg.main) {
+					pkg.main = pkg.main.replace(/^dist\//, '');
+				}
+				if (pkg.n8n) {
+					if (pkg.n8n.nodes) {
+						pkg.n8n.nodes = pkg.n8n.nodes.map((p) => p.replace(/^dist\//, ''));
+					}
+					if (pkg.n8n.credentials) {
+						pkg.n8n.credentials = pkg.n8n.credentials.map((p) => p.replace(/^dist\//, ''));
+					}
+				}
+				file.contents = Buffer.from(JSON.stringify(pkg, null, '\t') + '\n');
+			}
+			cb(null, file);
+		},
+	});
+
+	return src(packageSource).pipe(stripDistPrefix).pipe(dest(packageDestination));
 }
