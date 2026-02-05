@@ -1,14 +1,25 @@
 # n8n-nodes-openmercato
 
-This is an n8n community node package for **OpenMercato** integration. It provides nodes to send commands and consume/publish events through NATS messaging.
+This is an n8n community node package for **OpenMercato** integration. It provides nodes for interacting with the OpenMercato REST API, sending commands, and consuming/publishing events through NATS messaging.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
 ## Features
 
-This package includes three specialized nodes for OpenMercato:
+This package includes four nodes for OpenMercato:
 
-### 1. OpenMercato Command
+### 1. OpenMercato REST API
+
+Interact with the OpenMercato REST API using auto-generated operations from the OpenAPI spec.
+
+- **366 API endpoints** across 24 resource groups
+- **Declarative HTTP node** -- no custom code needed, uses n8n's built-in routing
+- **Bearer token authentication** via API keys
+- **Auto-generated from OpenAPI spec** using [@algolia/n8n-openapi-node](https://www.npmjs.com/package/@algolia/n8n-openapi-node)
+
+**Available resources:** Authentication & Accounts, Directory, Configuration, Audit & Action Logs, Attachments, API Keys, Onboarding, Business Rules, Feature Toggles, Workflows, Search, Currencies, Notifications, AI Assistant, Contractors, FMS Quotes & Offers, FMS Locations, FMS Products, FMS Documents, FMS Projects, FMS Financials, FMS Teams, Transports, Email Templates
+
+### 2. OpenMercato Command
 
 Send commands to OpenMercato via NATS JetStream.
 
@@ -17,7 +28,7 @@ Send commands to OpenMercato via NATS JetStream.
 - **Automatic subject routing** with `inbound.` prefix
 - **Tenant and organization scoping** from credentials
 
-### 2. OpenMercato Event Consumer (Trigger)
+### 3. OpenMercato Event Consumer (Trigger)
 
 Subscribe to OpenMercato events in real-time.
 
@@ -27,7 +38,7 @@ Subscribe to OpenMercato events in real-time.
 - **Queue groups** for load balancing across multiple n8n instances
 - **Best-effort JSON parsing** with graceful error handling
 
-### 3. OpenMercato Event Publisher
+### 4. OpenMercato Event Publisher
 
 Publish events to OpenMercato.
 
@@ -63,7 +74,32 @@ npm run build
 
 ## Configuration
 
-### Credentials Setup
+### Credentials
+
+This package provides two credential types for different communication methods.
+
+#### OpenMercato REST API Credentials
+
+Used by the **OpenMercato REST API** node for HTTP API access.
+
+1. In n8n, create new **OpenMercato REST API** credentials
+2. Configure the following fields:
+
+| Field         | Description                               | Required |
+| ------------- | ----------------------------------------- | -------- |
+| **Base URL**  | Base URL of the OpenMercato instance      | Yes      |
+| **API Token** | Bearer token (API key) for authentication | Yes      |
+
+**Example:**
+
+```
+Base URL: https://openmercato.freighttech.org
+API Token: your-api-key-here
+```
+
+#### OpenMercato API Credentials (NATS)
+
+Used by the **Command**, **Event Consumer**, and **Event Publisher** nodes for NATS messaging.
 
 1. In n8n, create new **OpenMercato API** credentials
 2. Configure the following fields:
@@ -95,6 +131,26 @@ Authentication Type: Credentials File
 ---
 
 ## Usage
+
+### OpenMercato REST API Node
+
+**Purpose:** Call any OpenMercato REST API endpoint directly from n8n.
+
+**Example Workflow:**
+
+```
+Schedule Trigger → OpenMercato REST API (List Companies) → Spreadsheet File → Send Email
+```
+
+**Configuration:**
+
+1. **Resource:** Select from 24 resource groups (e.g., Customers, FMS Projects, Transports)
+2. **Operation:** Select the specific API operation (e.g., List companies, Create deal)
+3. **Parameters:** Fill in any required/optional query parameters and request body fields
+
+The node uses n8n's declarative HTTP routing -- all parameters, request bodies, and headers are automatically mapped from the OpenAPI spec.
+
+---
 
 ### OpenMercato Command Node
 
@@ -268,32 +324,49 @@ Examples:
 
 ---
 
-## Refreshing Command/Event Metadata
+## Refreshing Metadata
 
-The package includes scripts to discover commands and events from the OpenMercato codebase.
+### REST API Node (OpenAPI)
 
-### Run Discovery
+The REST API node properties are auto-generated from the OpenMercato OpenAPI spec.
 
 ```bash
-# Set the OpenMercato path
-export OPENMERCATO_PATH=/path/to/openmercato
+# Regenerate from cached spec
+npm run generate:openapi
 
-# Or use command-line argument
+# Force re-download the spec and regenerate
+npm run generate:openapi -- --download
+```
+
+This will:
+
+1. Download the OpenAPI spec from `https://openmercato.freighttech.org/api/docs/openapi`
+2. Pre-process the spec (resolve `$ref` references, apply compatibility fixes)
+3. Generate n8n node properties using `@algolia/n8n-openapi-node`
+4. Write the output to `nodes/OpenMercatoRestApi/properties.ts`
+
+**When to regenerate:**
+
+- After OpenMercato API endpoints are added or changed
+- After updating the `@algolia/n8n-openapi-node` dependency
+
+### Command/Event Metadata (NATS)
+
+The Command and Event nodes use metadata discovered from the OpenMercato codebase.
+
+```bash
+# Discover commands and events
 npm run discover -- --path /path/to/openmercato
 
-# Generate templates
-npm run generate:templates
-
-# Or run both at once
-npm run refresh:metadata
+# Alias
+npm run refresh:metadata -- --path /path/to/openmercato
 ```
 
 This will:
 
 1. Scan OpenMercato codebase for registered commands
 2. Extract event definitions from modules
-3. Generate message templates from command schemas
-4. Update `src/generated/*.json` files
+3. Update `src/generated/commands.json` and `src/generated/events.json`
 
 **When to refresh:**
 
@@ -310,22 +383,26 @@ This will:
 ```
 n8n-nodes-openmercato/
 ├── credentials/
-│   └── OpenMercatoApi/          # Credentials definition
+│   ├── OpenMercatoApi/             # NATS credentials (commands/events)
+│   └── OpenMercatoRestApi/         # REST API credentials (HTTP/Bearer)
 ├── nodes/
-│   ├── OpenMercatoCommand/      # Command node
-│   ├── OpenMercatoEventConsumer/ # Event consumer trigger
-│   └── OpenMercatoEventPublisher/ # Event publisher
+│   ├── OpenMercatoCommand/         # Send commands via NATS
+│   ├── OpenMercatoEventConsumer/   # Subscribe to events (trigger)
+│   ├── OpenMercatoEventPublisher/  # Publish events via NATS
+│   └── OpenMercatoRestApi/         # REST API node (auto-generated)
+│       ├── OpenMercatoRestApi.node.ts
+│       └── properties.ts           # Generated from OpenAPI spec
 ├── utils/
-│   ├── MetadataLoader.ts        # Load commands/events metadata
-│   ├── OpenMercatoConnection.ts # NATS connection helpers
-│   └── NodeLogger.ts            # Logging utilities
+│   ├── MetadataLoader.ts           # Load commands/events metadata
+│   ├── OpenMercatoConnection.ts    # NATS connection helpers
+│   └── NodeLogger.ts               # Logging utilities
 ├── scripts/
-│   ├── discover-commands-events.ts # Discovery script
-│   └── generate-templates.ts    # Template generator
-├── src/generated/               # Auto-generated metadata
+│   ├── discover-commands-events.ts # NATS command/event discovery
+│   └── generate-openapi-node.ts    # OpenAPI → n8n properties generator
+├── src/generated/                  # Auto-generated metadata
 │   ├── commands.json
 │   ├── events.json
-│   └── templates.json
+│   └── openapi.json                # Cached OpenAPI spec
 └── icons/
     └── openmercato.svg
 ```
@@ -412,12 +489,16 @@ Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for gu
 
 ## Changelog
 
+### 0.3.0
+
+- **NEW**: OpenMercato REST API node with 366 endpoints across 24 resources, auto-generated from the OpenAPI spec using `@algolia/n8n-openapi-node`
+- **NEW**: OpenMercato REST API credentials with Bearer token authentication and connection testing
+- **NEW**: `npm run generate:openapi` script to regenerate node properties from the OpenAPI spec
+
 ### 0.1.0 (Initial Release)
 
-- ✨ **NEW**: OpenMercato Command node with 250+ discovered commands
-- ✨ **NEW**: OpenMercato Event Consumer trigger with tenant-scoped subscriptions
-- ✨ **NEW**: OpenMercato Event Publisher with automatic tenant prefixing
-- ✨ **NEW**: Discovery scripts for commands and events
-- ✨ **NEW**: Auto-generated message templates
-- 🔧 **IMPROVED**: Support for Synadia Cloud .creds authentication
-- 📚 **DOCS**: Comprehensive user guide and examples
+- **NEW**: OpenMercato Command node with 250+ discovered commands
+- **NEW**: OpenMercato Event Consumer trigger with tenant-scoped subscriptions
+- **NEW**: OpenMercato Event Publisher with automatic tenant prefixing
+- **NEW**: Discovery scripts for commands and events
+- **NEW**: Auto-generated message templates
