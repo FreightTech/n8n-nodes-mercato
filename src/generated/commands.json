@@ -1,0 +1,1808 @@
+[
+  {
+    "id": "auth.roles.create",
+    "module": "auth",
+    "entity": "roles",
+    "action": "create",
+    "label": "Create Roles"
+  },
+  {
+    "id": "auth.roles.delete",
+    "module": "auth",
+    "entity": "roles",
+    "action": "delete",
+    "label": "Delete Roles"
+  },
+  {
+    "id": "auth.roles.update",
+    "module": "auth",
+    "entity": "roles",
+    "action": "update",
+    "label": "Update Roles"
+  },
+  {
+    "id": "auth.users.create",
+    "module": "auth",
+    "entity": "users",
+    "action": "create",
+    "label": "Create Users"
+  },
+  {
+    "id": "auth.users.delete",
+    "module": "auth",
+    "entity": "users",
+    "action": "delete",
+    "label": "Delete Users"
+  },
+  {
+    "id": "auth.users.update",
+    "module": "auth",
+    "entity": "users",
+    "action": "update",
+    "label": "Update Users"
+  },
+  {
+    "id": "catalog.categories.create",
+    "module": "catalog",
+    "entity": "categories",
+    "action": "create",
+    "label": "Create Categories"
+  },
+  {
+    "id": "catalog.categories.delete",
+    "module": "catalog",
+    "entity": "categories",
+    "action": "delete",
+    "label": "Delete Categories"
+  },
+  {
+    "id": "catalog.categories.update",
+    "module": "catalog",
+    "entity": "categories",
+    "action": "update",
+    "label": "Update Categories"
+  },
+  {
+    "id": "catalog.offers.create",
+    "module": "catalog",
+    "entity": "offers",
+    "action": "create",
+    "label": "Create Offers"
+  },
+  {
+    "id": "catalog.offers.delete",
+    "module": "catalog",
+    "entity": "offers",
+    "action": "delete",
+    "label": "Delete Offers"
+  },
+  {
+    "id": "catalog.offers.update",
+    "module": "catalog",
+    "entity": "offers",
+    "action": "update",
+    "label": "Update Offers"
+  },
+  {
+    "id": "catalog.optionSchemas.create",
+    "module": "catalog",
+    "entity": "optionSchemas",
+    "action": "create",
+    "label": "Create OptionSchemas"
+  },
+  {
+    "id": "catalog.optionSchemas.delete",
+    "module": "catalog",
+    "entity": "optionSchemas",
+    "action": "delete",
+    "label": "Delete OptionSchemas"
+  },
+  {
+    "id": "catalog.optionSchemas.update",
+    "module": "catalog",
+    "entity": "optionSchemas",
+    "action": "update",
+    "label": "Update OptionSchemas"
+  },
+  {
+    "id": "catalog.priceKinds.create",
+    "module": "catalog",
+    "entity": "priceKinds",
+    "action": "create",
+    "label": "Create PriceKinds"
+  },
+  {
+    "id": "catalog.priceKinds.delete",
+    "module": "catalog",
+    "entity": "priceKinds",
+    "action": "delete",
+    "label": "Delete PriceKinds"
+  },
+  {
+    "id": "catalog.priceKinds.update",
+    "module": "catalog",
+    "entity": "priceKinds",
+    "action": "update",
+    "label": "Update PriceKinds"
+  },
+  {
+    "id": "catalog.prices.create",
+    "module": "catalog",
+    "entity": "prices",
+    "action": "create",
+    "label": "Create Prices"
+  },
+  {
+    "id": "catalog.prices.delete",
+    "module": "catalog",
+    "entity": "prices",
+    "action": "delete",
+    "label": "Delete Prices"
+  },
+  {
+    "id": "catalog.prices.update",
+    "module": "catalog",
+    "entity": "prices",
+    "action": "update",
+    "label": "Update Prices"
+  },
+  {
+    "id": "catalog.products.create",
+    "module": "catalog",
+    "entity": "products",
+    "action": "create",
+    "label": "Create Products"
+  },
+  {
+    "id": "catalog.products.delete",
+    "module": "catalog",
+    "entity": "products",
+    "action": "delete",
+    "label": "Delete Products"
+  },
+  {
+    "id": "catalog.products.update",
+    "module": "catalog",
+    "entity": "products",
+    "action": "update",
+    "label": "Update Products"
+  },
+  {
+    "id": "catalog.variants.create",
+    "module": "catalog",
+    "entity": "variants",
+    "action": "create",
+    "label": "Create Variants"
+  },
+  {
+    "id": "catalog.variants.delete",
+    "module": "catalog",
+    "entity": "variants",
+    "action": "delete",
+    "label": "Delete Variants"
+  },
+  {
+    "id": "catalog.variants.update",
+    "module": "catalog",
+    "entity": "variants",
+    "action": "update",
+    "label": "Update Variants"
+  },
+  {
+    "id": "contractors.addresses.create",
+    "module": "contractors",
+    "entity": "addresses",
+    "action": "create",
+    "label": "Create Addresses"
+  },
+  {
+    "id": "contractors.addresses.delete",
+    "module": "contractors",
+    "entity": "addresses",
+    "action": "delete",
+    "label": "Delete Addresses"
+  },
+  {
+    "id": "contractors.addresses.update",
+    "module": "contractors",
+    "entity": "addresses",
+    "action": "update",
+    "label": "Update Addresses"
+  },
+  {
+    "id": "contractors.bank-accounts.batch-create",
+    "module": "contractors",
+    "entity": "bank-accounts",
+    "action": "batch-create",
+    "label": "Batch-create Bank-accounts"
+  },
+  {
+    "id": "contractors.bank-accounts.create",
+    "module": "contractors",
+    "entity": "bank-accounts",
+    "action": "create",
+    "label": "Create Bank-accounts"
+  },
+  {
+    "id": "contractors.bank-accounts.delete",
+    "module": "contractors",
+    "entity": "bank-accounts",
+    "action": "delete",
+    "label": "Delete Bank-accounts"
+  },
+  {
+    "id": "contractors.bank-accounts.update",
+    "module": "contractors",
+    "entity": "bank-accounts",
+    "action": "update",
+    "label": "Update Bank-accounts"
+  },
+  {
+    "id": "contractors.contacts.create",
+    "module": "contractors",
+    "entity": "contacts",
+    "action": "create",
+    "label": "Create Contacts"
+  },
+  {
+    "id": "contractors.contacts.delete",
+    "module": "contractors",
+    "entity": "contacts",
+    "action": "delete",
+    "label": "Delete Contacts"
+  },
+  {
+    "id": "contractors.contacts.update",
+    "module": "contractors",
+    "entity": "contacts",
+    "action": "update",
+    "label": "Update Contacts"
+  },
+  {
+    "id": "contractors.credit-limits.delete",
+    "module": "contractors",
+    "entity": "credit-limits",
+    "action": "delete",
+    "label": "Delete Credit-limits"
+  },
+  {
+    "id": "contractors.credit-limits.upsert",
+    "module": "contractors",
+    "entity": "credit-limits",
+    "action": "upsert",
+    "label": "Upsert Credit-limits"
+  },
+  {
+    "id": "contractors.payment-terms.delete",
+    "module": "contractors",
+    "entity": "payment-terms",
+    "action": "delete",
+    "label": "Delete Payment-terms"
+  },
+  {
+    "id": "contractors.payment-terms.upsert",
+    "module": "contractors",
+    "entity": "payment-terms",
+    "action": "upsert",
+    "label": "Upsert Payment-terms"
+  },
+  {
+    "id": "contractors.sop-comments.create",
+    "module": "contractors",
+    "entity": "sop-comments",
+    "action": "create",
+    "label": "Create Sop-comments"
+  },
+  {
+    "id": "contractors.sop-comments.delete",
+    "module": "contractors",
+    "entity": "sop-comments",
+    "action": "delete",
+    "label": "Delete Sop-comments"
+  },
+  {
+    "id": "contractors.sop-comments.update",
+    "module": "contractors",
+    "entity": "sop-comments",
+    "action": "update",
+    "label": "Update Sop-comments"
+  },
+  {
+    "id": "currencies.currencies.create",
+    "module": "currencies",
+    "entity": "currencies",
+    "action": "create",
+    "label": "Create Currencies"
+  },
+  {
+    "id": "currencies.currencies.delete",
+    "module": "currencies",
+    "entity": "currencies",
+    "action": "delete",
+    "label": "Delete Currencies"
+  },
+  {
+    "id": "currencies.currencies.update",
+    "module": "currencies",
+    "entity": "currencies",
+    "action": "update",
+    "label": "Update Currencies"
+  },
+  {
+    "id": "currencies.exchange_rates.create",
+    "module": "currencies",
+    "entity": "exchange_rates",
+    "action": "create",
+    "label": "Create Exchange_rates"
+  },
+  {
+    "id": "currencies.exchange_rates.delete",
+    "module": "currencies",
+    "entity": "exchange_rates",
+    "action": "delete",
+    "label": "Delete Exchange_rates"
+  },
+  {
+    "id": "currencies.exchange_rates.update",
+    "module": "currencies",
+    "entity": "exchange_rates",
+    "action": "update",
+    "label": "Update Exchange_rates"
+  },
+  {
+    "id": "customers.activities.create",
+    "module": "customers",
+    "entity": "activities",
+    "action": "create",
+    "label": "Create Activities"
+  },
+  {
+    "id": "customers.activities.delete",
+    "module": "customers",
+    "entity": "activities",
+    "action": "delete",
+    "label": "Delete Activities"
+  },
+  {
+    "id": "customers.activities.update",
+    "module": "customers",
+    "entity": "activities",
+    "action": "update",
+    "label": "Update Activities"
+  },
+  {
+    "id": "customers.addresses.create",
+    "module": "customers",
+    "entity": "addresses",
+    "action": "create",
+    "label": "Create Addresses"
+  },
+  {
+    "id": "customers.addresses.delete",
+    "module": "customers",
+    "entity": "addresses",
+    "action": "delete",
+    "label": "Delete Addresses"
+  },
+  {
+    "id": "customers.addresses.update",
+    "module": "customers",
+    "entity": "addresses",
+    "action": "update",
+    "label": "Update Addresses"
+  },
+  {
+    "id": "customers.comments.create",
+    "module": "customers",
+    "entity": "comments",
+    "action": "create",
+    "label": "Create Comments"
+  },
+  {
+    "id": "customers.comments.delete",
+    "module": "customers",
+    "entity": "comments",
+    "action": "delete",
+    "label": "Delete Comments"
+  },
+  {
+    "id": "customers.comments.update",
+    "module": "customers",
+    "entity": "comments",
+    "action": "update",
+    "label": "Update Comments"
+  },
+  {
+    "id": "customers.companies.create",
+    "module": "customers",
+    "entity": "companies",
+    "action": "create",
+    "label": "Create Companies"
+  },
+  {
+    "id": "customers.companies.delete",
+    "module": "customers",
+    "entity": "companies",
+    "action": "delete",
+    "label": "Delete Companies"
+  },
+  {
+    "id": "customers.companies.update",
+    "module": "customers",
+    "entity": "companies",
+    "action": "update",
+    "label": "Update Companies"
+  },
+  {
+    "id": "customers.deals.create",
+    "module": "customers",
+    "entity": "deals",
+    "action": "create",
+    "label": "Create Deals"
+  },
+  {
+    "id": "customers.deals.delete",
+    "module": "customers",
+    "entity": "deals",
+    "action": "delete",
+    "label": "Delete Deals"
+  },
+  {
+    "id": "customers.deals.update",
+    "module": "customers",
+    "entity": "deals",
+    "action": "update",
+    "label": "Update Deals"
+  },
+  {
+    "id": "customers.dictionaryEntries.create",
+    "module": "customers",
+    "entity": "dictionaryEntries",
+    "action": "create",
+    "label": "Create DictionaryEntries"
+  },
+  {
+    "id": "customers.dictionaryEntries.delete",
+    "module": "customers",
+    "entity": "dictionaryEntries",
+    "action": "delete",
+    "label": "Delete DictionaryEntries"
+  },
+  {
+    "id": "customers.dictionaryEntries.update",
+    "module": "customers",
+    "entity": "dictionaryEntries",
+    "action": "update",
+    "label": "Update DictionaryEntries"
+  },
+  {
+    "id": "customers.people.create",
+    "module": "customers",
+    "entity": "people",
+    "action": "create",
+    "label": "Create People"
+  },
+  {
+    "id": "customers.people.delete",
+    "module": "customers",
+    "entity": "people",
+    "action": "delete",
+    "label": "Delete People"
+  },
+  {
+    "id": "customers.people.update",
+    "module": "customers",
+    "entity": "people",
+    "action": "update",
+    "label": "Update People"
+  },
+  {
+    "id": "customers.settings.save",
+    "module": "customers",
+    "entity": "settings",
+    "action": "save",
+    "label": "Save Settings"
+  },
+  {
+    "id": "customers.tags.assign",
+    "module": "customers",
+    "entity": "tags",
+    "action": "assign",
+    "label": "Assign Tags"
+  },
+  {
+    "id": "customers.tags.create",
+    "module": "customers",
+    "entity": "tags",
+    "action": "create",
+    "label": "Create Tags"
+  },
+  {
+    "id": "customers.tags.delete",
+    "module": "customers",
+    "entity": "tags",
+    "action": "delete",
+    "label": "Delete Tags"
+  },
+  {
+    "id": "customers.tags.unassign",
+    "module": "customers",
+    "entity": "tags",
+    "action": "unassign",
+    "label": "Unassign Tags"
+  },
+  {
+    "id": "customers.tags.update",
+    "module": "customers",
+    "entity": "tags",
+    "action": "update",
+    "label": "Update Tags"
+  },
+  {
+    "id": "customers.todos.create",
+    "module": "customers",
+    "entity": "todos",
+    "action": "create",
+    "label": "Create Todos"
+  },
+  {
+    "id": "customers.todos.unlink",
+    "module": "customers",
+    "entity": "todos",
+    "action": "unlink",
+    "label": "Unlink Todos"
+  },
+  {
+    "id": "directory.organizations.create",
+    "module": "directory",
+    "entity": "organizations",
+    "action": "create",
+    "label": "Create Organizations"
+  },
+  {
+    "id": "directory.organizations.delete",
+    "module": "directory",
+    "entity": "organizations",
+    "action": "delete",
+    "label": "Delete Organizations"
+  },
+  {
+    "id": "directory.organizations.update",
+    "module": "directory",
+    "entity": "organizations",
+    "action": "update",
+    "label": "Update Organizations"
+  },
+  {
+    "id": "directory.tenants.create",
+    "module": "directory",
+    "entity": "tenants",
+    "action": "create",
+    "label": "Create Tenants"
+  },
+  {
+    "id": "directory.tenants.delete",
+    "module": "directory",
+    "entity": "tenants",
+    "action": "delete",
+    "label": "Delete Tenants"
+  },
+  {
+    "id": "directory.tenants.update",
+    "module": "directory",
+    "entity": "tenants",
+    "action": "update",
+    "label": "Update Tenants"
+  },
+  {
+    "id": "feature_toggles.global.create",
+    "module": "feature_toggles",
+    "entity": "global",
+    "action": "create",
+    "label": "Create Global"
+  },
+  {
+    "id": "feature_toggles.global.delete",
+    "module": "feature_toggles",
+    "entity": "global",
+    "action": "delete",
+    "label": "Delete Global"
+  },
+  {
+    "id": "feature_toggles.global.update",
+    "module": "feature_toggles",
+    "entity": "global",
+    "action": "update",
+    "label": "Update Global"
+  },
+  {
+    "id": "feature_toggles.overrides.changeState",
+    "module": "feature_toggles",
+    "entity": "overrides",
+    "action": "changeState",
+    "label": "ChangeState Overrides"
+  },
+  {
+    "id": "fms_documents.documents.create",
+    "module": "fms_documents",
+    "entity": "documents",
+    "action": "create",
+    "label": "Create Documents"
+  },
+  {
+    "id": "fms_documents.documents.delete",
+    "module": "fms_documents",
+    "entity": "documents",
+    "action": "delete",
+    "label": "Delete Documents"
+  },
+  {
+    "id": "fms_documents.documents.update",
+    "module": "fms_documents",
+    "entity": "documents",
+    "action": "update",
+    "label": "Update Documents"
+  },
+  {
+    "id": "fms_financials.invoices.approve",
+    "module": "fms_financials",
+    "entity": "invoices",
+    "action": "approve",
+    "label": "Approve Invoices"
+  },
+  {
+    "id": "fms_financials.invoices.create",
+    "module": "fms_financials",
+    "entity": "invoices",
+    "action": "create",
+    "label": "Create Invoices"
+  },
+  {
+    "id": "fms_financials.invoices.delete",
+    "module": "fms_financials",
+    "entity": "invoices",
+    "action": "delete",
+    "label": "Delete Invoices"
+  },
+  {
+    "id": "fms_financials.invoices.reject",
+    "module": "fms_financials",
+    "entity": "invoices",
+    "action": "reject",
+    "label": "Reject Invoices"
+  },
+  {
+    "id": "fms_financials.invoices.update",
+    "module": "fms_financials",
+    "entity": "invoices",
+    "action": "update",
+    "label": "Update Invoices"
+  },
+  {
+    "id": "fms_financials.line_items.match_charge_code",
+    "module": "fms_financials",
+    "entity": "line_items",
+    "action": "match_charge_code",
+    "label": "Match_charge_code Line_items"
+  },
+  {
+    "id": "fms_locations.ports.create",
+    "module": "fms_locations",
+    "entity": "ports",
+    "action": "create",
+    "label": "Create Ports"
+  },
+  {
+    "id": "fms_locations.ports.delete",
+    "module": "fms_locations",
+    "entity": "ports",
+    "action": "delete",
+    "label": "Delete Ports"
+  },
+  {
+    "id": "fms_locations.ports.update",
+    "module": "fms_locations",
+    "entity": "ports",
+    "action": "update",
+    "label": "Update Ports"
+  },
+  {
+    "id": "fms_locations.terminals.create",
+    "module": "fms_locations",
+    "entity": "terminals",
+    "action": "create",
+    "label": "Create Terminals"
+  },
+  {
+    "id": "fms_locations.terminals.delete",
+    "module": "fms_locations",
+    "entity": "terminals",
+    "action": "delete",
+    "label": "Delete Terminals"
+  },
+  {
+    "id": "fms_locations.terminals.update",
+    "module": "fms_locations",
+    "entity": "terminals",
+    "action": "update",
+    "label": "Update Terminals"
+  },
+  {
+    "id": "fms_locations.unified.create",
+    "module": "fms_locations",
+    "entity": "unified",
+    "action": "create",
+    "label": "Create Unified"
+  },
+  {
+    "id": "fms_locations.unified.delete",
+    "module": "fms_locations",
+    "entity": "unified",
+    "action": "delete",
+    "label": "Delete Unified"
+  },
+  {
+    "id": "fms_locations.unified.update",
+    "module": "fms_locations",
+    "entity": "unified",
+    "action": "update",
+    "label": "Update Unified"
+  },
+  {
+    "id": "fms_products.carriers.create",
+    "module": "fms_products",
+    "entity": "carriers",
+    "action": "create",
+    "label": "Create Carriers"
+  },
+  {
+    "id": "fms_products.carriers.delete",
+    "module": "fms_products",
+    "entity": "carriers",
+    "action": "delete",
+    "label": "Delete Carriers"
+  },
+  {
+    "id": "fms_products.carriers.update",
+    "module": "fms_products",
+    "entity": "carriers",
+    "action": "update",
+    "label": "Update Carriers"
+  },
+  {
+    "id": "fms_products.charge_codes.create",
+    "module": "fms_products",
+    "entity": "charge_codes",
+    "action": "create",
+    "label": "Create Charge_codes"
+  },
+  {
+    "id": "fms_products.charge_codes.delete",
+    "module": "fms_products",
+    "entity": "charge_codes",
+    "action": "delete",
+    "label": "Delete Charge_codes"
+  },
+  {
+    "id": "fms_products.charge_codes.update",
+    "module": "fms_products",
+    "entity": "charge_codes",
+    "action": "update",
+    "label": "Update Charge_codes"
+  },
+  {
+    "id": "fms_products.products.create",
+    "module": "fms_products",
+    "entity": "products",
+    "action": "create",
+    "label": "Create Products"
+  },
+  {
+    "id": "fms_products.products.delete",
+    "module": "fms_products",
+    "entity": "products",
+    "action": "delete",
+    "label": "Delete Products"
+  },
+  {
+    "id": "fms_products.products.update",
+    "module": "fms_products",
+    "entity": "products",
+    "action": "update",
+    "label": "Update Products"
+  },
+  {
+    "id": "fms_products.variants.create",
+    "module": "fms_products",
+    "entity": "variants",
+    "action": "create",
+    "label": "Create Variants"
+  },
+  {
+    "id": "fms_products.variants.delete",
+    "module": "fms_products",
+    "entity": "variants",
+    "action": "delete",
+    "label": "Delete Variants"
+  },
+  {
+    "id": "fms_products.variants.update",
+    "module": "fms_products",
+    "entity": "variants",
+    "action": "update",
+    "label": "Update Variants"
+  },
+  {
+    "id": "fms_projects.air_units.create",
+    "module": "fms_projects",
+    "entity": "air_units",
+    "action": "create",
+    "label": "Create Air_units"
+  },
+  {
+    "id": "fms_projects.air_units.delete",
+    "module": "fms_projects",
+    "entity": "air_units",
+    "action": "delete",
+    "label": "Delete Air_units"
+  },
+  {
+    "id": "fms_projects.air_units.update",
+    "module": "fms_projects",
+    "entity": "air_units",
+    "action": "update",
+    "label": "Update Air_units"
+  },
+  {
+    "id": "fms_projects.project_cargo.create",
+    "module": "fms_projects",
+    "entity": "project_cargo",
+    "action": "create",
+    "label": "Create Project_cargo"
+  },
+  {
+    "id": "fms_projects.project_cargo.delete",
+    "module": "fms_projects",
+    "entity": "project_cargo",
+    "action": "delete",
+    "label": "Delete Project_cargo"
+  },
+  {
+    "id": "fms_projects.project_cargo.update",
+    "module": "fms_projects",
+    "entity": "project_cargo",
+    "action": "update",
+    "label": "Update Project_cargo"
+  },
+  {
+    "id": "fms_projects.project_invoices.create",
+    "module": "fms_projects",
+    "entity": "project_invoices",
+    "action": "create",
+    "label": "Create Project_invoices"
+  },
+  {
+    "id": "fms_projects.project_invoices.delete",
+    "module": "fms_projects",
+    "entity": "project_invoices",
+    "action": "delete",
+    "label": "Delete Project_invoices"
+  },
+  {
+    "id": "fms_projects.project_invoices.review",
+    "module": "fms_projects",
+    "entity": "project_invoices",
+    "action": "review",
+    "label": "Review Project_invoices"
+  },
+  {
+    "id": "fms_projects.project_invoices.update",
+    "module": "fms_projects",
+    "entity": "project_invoices",
+    "action": "update",
+    "label": "Update Project_invoices"
+  },
+  {
+    "id": "fms_projects.project_legs.create",
+    "module": "fms_projects",
+    "entity": "project_legs",
+    "action": "create",
+    "label": "Create Project_legs"
+  },
+  {
+    "id": "fms_projects.project_legs.delete",
+    "module": "fms_projects",
+    "entity": "project_legs",
+    "action": "delete",
+    "label": "Delete Project_legs"
+  },
+  {
+    "id": "fms_projects.project_legs.update",
+    "module": "fms_projects",
+    "entity": "project_legs",
+    "action": "update",
+    "label": "Update Project_legs"
+  },
+  {
+    "id": "fms_projects.projects.create",
+    "module": "fms_projects",
+    "entity": "projects",
+    "action": "create",
+    "label": "Create Projects"
+  },
+  {
+    "id": "fms_projects.projects.delete",
+    "module": "fms_projects",
+    "entity": "projects",
+    "action": "delete",
+    "label": "Delete Projects"
+  },
+  {
+    "id": "fms_projects.projects.update",
+    "module": "fms_projects",
+    "entity": "projects",
+    "action": "update",
+    "label": "Update Projects"
+  },
+  {
+    "id": "fms_projects.road_units.create",
+    "module": "fms_projects",
+    "entity": "road_units",
+    "action": "create",
+    "label": "Create Road_units"
+  },
+  {
+    "id": "fms_projects.road_units.delete",
+    "module": "fms_projects",
+    "entity": "road_units",
+    "action": "delete",
+    "label": "Delete Road_units"
+  },
+  {
+    "id": "fms_projects.road_units.update",
+    "module": "fms_projects",
+    "entity": "road_units",
+    "action": "update",
+    "label": "Update Road_units"
+  },
+  {
+    "id": "fms_projects.sea_containers.create",
+    "module": "fms_projects",
+    "entity": "sea_containers",
+    "action": "create",
+    "label": "Create Sea_containers"
+  },
+  {
+    "id": "fms_projects.sea_containers.delete",
+    "module": "fms_projects",
+    "entity": "sea_containers",
+    "action": "delete",
+    "label": "Delete Sea_containers"
+  },
+  {
+    "id": "fms_projects.sea_containers.update",
+    "module": "fms_projects",
+    "entity": "sea_containers",
+    "action": "update",
+    "label": "Update Sea_containers"
+  },
+  {
+    "id": "fms_quotes.offer_lines.create",
+    "module": "fms_quotes",
+    "entity": "offer_lines",
+    "action": "create",
+    "label": "Create Offer_lines"
+  },
+  {
+    "id": "fms_quotes.offer_lines.delete",
+    "module": "fms_quotes",
+    "entity": "offer_lines",
+    "action": "delete",
+    "label": "Delete Offer_lines"
+  },
+  {
+    "id": "fms_quotes.offer_lines.update",
+    "module": "fms_quotes",
+    "entity": "offer_lines",
+    "action": "update",
+    "label": "Update Offer_lines"
+  },
+  {
+    "id": "fms_quotes.offers.convert_to_project",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "convert_to_project",
+    "label": "Convert_to_project Offers"
+  },
+  {
+    "id": "fms_quotes.offers.create",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "create",
+    "label": "Create Offers"
+  },
+  {
+    "id": "fms_quotes.offers.create_version",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "create_version",
+    "label": "Create_version Offers"
+  },
+  {
+    "id": "fms_quotes.offers.delete",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "delete",
+    "label": "Delete Offers"
+  },
+  {
+    "id": "fms_quotes.offers.generate_pdf",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "generate_pdf",
+    "label": "Generate_pdf Offers"
+  },
+  {
+    "id": "fms_quotes.offers.send",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "send",
+    "label": "Send Offers"
+  },
+  {
+    "id": "fms_quotes.offers.update",
+    "module": "fms_quotes",
+    "entity": "offers",
+    "action": "update",
+    "label": "Update Offers"
+  },
+  {
+    "id": "fms_quotes.quote_lines.create",
+    "module": "fms_quotes",
+    "entity": "quote_lines",
+    "action": "create",
+    "label": "Create Quote_lines"
+  },
+  {
+    "id": "fms_quotes.quote_lines.delete",
+    "module": "fms_quotes",
+    "entity": "quote_lines",
+    "action": "delete",
+    "label": "Delete Quote_lines"
+  },
+  {
+    "id": "fms_quotes.quote_lines.update",
+    "module": "fms_quotes",
+    "entity": "quote_lines",
+    "action": "update",
+    "label": "Update Quote_lines"
+  },
+  {
+    "id": "fms_quotes.quotes.create",
+    "module": "fms_quotes",
+    "entity": "quotes",
+    "action": "create",
+    "label": "Create Quotes"
+  },
+  {
+    "id": "fms_quotes.quotes.delete",
+    "module": "fms_quotes",
+    "entity": "quotes",
+    "action": "delete",
+    "label": "Delete Quotes"
+  },
+  {
+    "id": "fms_quotes.quotes.update",
+    "module": "fms_quotes",
+    "entity": "quotes",
+    "action": "update",
+    "label": "Update Quotes"
+  },
+  {
+    "id": "fms_tracking.tracking.register",
+    "module": "fms_tracking",
+    "entity": "tracking",
+    "action": "register",
+    "label": "Register Tracking"
+  },
+  {
+    "id": "planner.availability-rule-sets.create",
+    "module": "planner",
+    "entity": "availability-rule-sets",
+    "action": "create",
+    "label": "Create Availability-rule-sets"
+  },
+  {
+    "id": "planner.availability-rule-sets.delete",
+    "module": "planner",
+    "entity": "availability-rule-sets",
+    "action": "delete",
+    "label": "Delete Availability-rule-sets"
+  },
+  {
+    "id": "planner.availability-rule-sets.update",
+    "module": "planner",
+    "entity": "availability-rule-sets",
+    "action": "update",
+    "label": "Update Availability-rule-sets"
+  },
+  {
+    "id": "planner.availability.create",
+    "module": "planner",
+    "entity": "availability",
+    "action": "create",
+    "label": "Create Availability"
+  },
+  {
+    "id": "planner.availability.date-specific.replace",
+    "module": "planner",
+    "entity": "availability",
+    "action": "date-specific",
+    "label": "Replace Date-specific"
+  },
+  {
+    "id": "planner.availability.delete",
+    "module": "planner",
+    "entity": "availability",
+    "action": "delete",
+    "label": "Delete Availability"
+  },
+  {
+    "id": "planner.availability.update",
+    "module": "planner",
+    "entity": "availability",
+    "action": "update",
+    "label": "Update Availability"
+  },
+  {
+    "id": "planner.availability.weekly.replace",
+    "module": "planner",
+    "entity": "availability",
+    "action": "weekly",
+    "label": "Replace Weekly"
+  },
+  {
+    "id": "resources.resource-activities.create",
+    "module": "resources",
+    "entity": "resource-activities",
+    "action": "create",
+    "label": "Create Resource-activities"
+  },
+  {
+    "id": "resources.resource-activities.delete",
+    "module": "resources",
+    "entity": "resource-activities",
+    "action": "delete",
+    "label": "Delete Resource-activities"
+  },
+  {
+    "id": "resources.resource-activities.update",
+    "module": "resources",
+    "entity": "resource-activities",
+    "action": "update",
+    "label": "Update Resource-activities"
+  },
+  {
+    "id": "resources.resource-comments.create",
+    "module": "resources",
+    "entity": "resource-comments",
+    "action": "create",
+    "label": "Create Resource-comments"
+  },
+  {
+    "id": "resources.resource-comments.delete",
+    "module": "resources",
+    "entity": "resource-comments",
+    "action": "delete",
+    "label": "Delete Resource-comments"
+  },
+  {
+    "id": "resources.resource-comments.update",
+    "module": "resources",
+    "entity": "resource-comments",
+    "action": "update",
+    "label": "Update Resource-comments"
+  },
+  {
+    "id": "resources.resources.create",
+    "module": "resources",
+    "entity": "resources",
+    "action": "create",
+    "label": "Create Resources"
+  },
+  {
+    "id": "resources.resources.delete",
+    "module": "resources",
+    "entity": "resources",
+    "action": "delete",
+    "label": "Delete Resources"
+  },
+  {
+    "id": "resources.resources.update",
+    "module": "resources",
+    "entity": "resources",
+    "action": "update",
+    "label": "Update Resources"
+  },
+  {
+    "id": "resources.resourceTags.assign",
+    "module": "resources",
+    "entity": "resourceTags",
+    "action": "assign",
+    "label": "Assign ResourceTags"
+  },
+  {
+    "id": "resources.resourceTags.create",
+    "module": "resources",
+    "entity": "resourceTags",
+    "action": "create",
+    "label": "Create ResourceTags"
+  },
+  {
+    "id": "resources.resourceTags.delete",
+    "module": "resources",
+    "entity": "resourceTags",
+    "action": "delete",
+    "label": "Delete ResourceTags"
+  },
+  {
+    "id": "resources.resourceTags.unassign",
+    "module": "resources",
+    "entity": "resourceTags",
+    "action": "unassign",
+    "label": "Unassign ResourceTags"
+  },
+  {
+    "id": "resources.resourceTags.update",
+    "module": "resources",
+    "entity": "resourceTags",
+    "action": "update",
+    "label": "Update ResourceTags"
+  },
+  {
+    "id": "resources.resourceTypes.create",
+    "module": "resources",
+    "entity": "resourceTypes",
+    "action": "create",
+    "label": "Create ResourceTypes"
+  },
+  {
+    "id": "resources.resourceTypes.delete",
+    "module": "resources",
+    "entity": "resourceTypes",
+    "action": "delete",
+    "label": "Delete ResourceTypes"
+  },
+  {
+    "id": "resources.resourceTypes.update",
+    "module": "resources",
+    "entity": "resourceTypes",
+    "action": "update",
+    "label": "Update ResourceTypes"
+  },
+  {
+    "id": "sales.channels.create",
+    "module": "sales",
+    "entity": "channels",
+    "action": "create",
+    "label": "Create Channels"
+  },
+  {
+    "id": "sales.channels.delete",
+    "module": "sales",
+    "entity": "channels",
+    "action": "delete",
+    "label": "Delete Channels"
+  },
+  {
+    "id": "sales.channels.update",
+    "module": "sales",
+    "entity": "channels",
+    "action": "update",
+    "label": "Update Channels"
+  },
+  {
+    "id": "sales.delivery-windows.create",
+    "module": "sales",
+    "entity": "delivery-windows",
+    "action": "create",
+    "label": "Create Delivery-windows"
+  },
+  {
+    "id": "sales.delivery-windows.delete",
+    "module": "sales",
+    "entity": "delivery-windows",
+    "action": "delete",
+    "label": "Delete Delivery-windows"
+  },
+  {
+    "id": "sales.delivery-windows.update",
+    "module": "sales",
+    "entity": "delivery-windows",
+    "action": "update",
+    "label": "Update Delivery-windows"
+  },
+  {
+    "id": "sales.document-addresses.create",
+    "module": "sales",
+    "entity": "document-addresses",
+    "action": "create",
+    "label": "Create Document-addresses"
+  },
+  {
+    "id": "sales.document-addresses.delete",
+    "module": "sales",
+    "entity": "document-addresses",
+    "action": "delete",
+    "label": "Delete Document-addresses"
+  },
+  {
+    "id": "sales.document-addresses.update",
+    "module": "sales",
+    "entity": "document-addresses",
+    "action": "update",
+    "label": "Update Document-addresses"
+  },
+  {
+    "id": "sales.notes.create",
+    "module": "sales",
+    "entity": "notes",
+    "action": "create",
+    "label": "Create Notes"
+  },
+  {
+    "id": "sales.notes.delete",
+    "module": "sales",
+    "entity": "notes",
+    "action": "delete",
+    "label": "Delete Notes"
+  },
+  {
+    "id": "sales.notes.update",
+    "module": "sales",
+    "entity": "notes",
+    "action": "update",
+    "label": "Update Notes"
+  },
+  {
+    "id": "sales.orders.adjustments.delete",
+    "module": "sales",
+    "entity": "orders",
+    "action": "adjustments",
+    "label": "Delete Adjustments"
+  },
+  {
+    "id": "sales.orders.adjustments.upsert",
+    "module": "sales",
+    "entity": "orders",
+    "action": "adjustments",
+    "label": "Upsert Adjustments"
+  },
+  {
+    "id": "sales.orders.create",
+    "module": "sales",
+    "entity": "orders",
+    "action": "create",
+    "label": "Create Orders"
+  },
+  {
+    "id": "sales.orders.delete",
+    "module": "sales",
+    "entity": "orders",
+    "action": "delete",
+    "label": "Delete Orders"
+  },
+  {
+    "id": "sales.orders.lines.delete",
+    "module": "sales",
+    "entity": "orders",
+    "action": "lines",
+    "label": "Delete Lines"
+  },
+  {
+    "id": "sales.orders.lines.upsert",
+    "module": "sales",
+    "entity": "orders",
+    "action": "lines",
+    "label": "Upsert Lines"
+  },
+  {
+    "id": "sales.orders.update",
+    "module": "sales",
+    "entity": "orders",
+    "action": "update",
+    "label": "Update Orders"
+  },
+  {
+    "id": "sales.payment-methods.create",
+    "module": "sales",
+    "entity": "payment-methods",
+    "action": "create",
+    "label": "Create Payment-methods"
+  },
+  {
+    "id": "sales.payment-methods.delete",
+    "module": "sales",
+    "entity": "payment-methods",
+    "action": "delete",
+    "label": "Delete Payment-methods"
+  },
+  {
+    "id": "sales.payment-methods.update",
+    "module": "sales",
+    "entity": "payment-methods",
+    "action": "update",
+    "label": "Update Payment-methods"
+  },
+  {
+    "id": "sales.payments.create",
+    "module": "sales",
+    "entity": "payments",
+    "action": "create",
+    "label": "Create Payments"
+  },
+  {
+    "id": "sales.payments.delete",
+    "module": "sales",
+    "entity": "payments",
+    "action": "delete",
+    "label": "Delete Payments"
+  },
+  {
+    "id": "sales.payments.update",
+    "module": "sales",
+    "entity": "payments",
+    "action": "update",
+    "label": "Update Payments"
+  },
+  {
+    "id": "sales.quotes.adjustments.delete",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "adjustments",
+    "label": "Delete Adjustments"
+  },
+  {
+    "id": "sales.quotes.adjustments.upsert",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "adjustments",
+    "label": "Upsert Adjustments"
+  },
+  {
+    "id": "sales.quotes.convert_to_order",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "convert_to_order",
+    "label": "Convert_to_order Quotes"
+  },
+  {
+    "id": "sales.quotes.create",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "create",
+    "label": "Create Quotes"
+  },
+  {
+    "id": "sales.quotes.delete",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "delete",
+    "label": "Delete Quotes"
+  },
+  {
+    "id": "sales.quotes.lines.delete",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "lines",
+    "label": "Delete Lines"
+  },
+  {
+    "id": "sales.quotes.lines.upsert",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "lines",
+    "label": "Upsert Lines"
+  },
+  {
+    "id": "sales.quotes.update",
+    "module": "sales",
+    "entity": "quotes",
+    "action": "update",
+    "label": "Update Quotes"
+  },
+  {
+    "id": "sales.settings.save",
+    "module": "sales",
+    "entity": "settings",
+    "action": "save",
+    "label": "Save Settings"
+  },
+  {
+    "id": "sales.shipments.create",
+    "module": "sales",
+    "entity": "shipments",
+    "action": "create",
+    "label": "Create Shipments"
+  },
+  {
+    "id": "sales.shipments.delete",
+    "module": "sales",
+    "entity": "shipments",
+    "action": "delete",
+    "label": "Delete Shipments"
+  },
+  {
+    "id": "sales.shipments.update",
+    "module": "sales",
+    "entity": "shipments",
+    "action": "update",
+    "label": "Update Shipments"
+  },
+  {
+    "id": "sales.shipping-methods.create",
+    "module": "sales",
+    "entity": "shipping-methods",
+    "action": "create",
+    "label": "Create Shipping-methods"
+  },
+  {
+    "id": "sales.shipping-methods.delete",
+    "module": "sales",
+    "entity": "shipping-methods",
+    "action": "delete",
+    "label": "Delete Shipping-methods"
+  },
+  {
+    "id": "sales.shipping-methods.update",
+    "module": "sales",
+    "entity": "shipping-methods",
+    "action": "update",
+    "label": "Update Shipping-methods"
+  },
+  {
+    "id": "sales.tags.create",
+    "module": "sales",
+    "entity": "tags",
+    "action": "create",
+    "label": "Create Tags"
+  },
+  {
+    "id": "sales.tags.delete",
+    "module": "sales",
+    "entity": "tags",
+    "action": "delete",
+    "label": "Delete Tags"
+  },
+  {
+    "id": "sales.tags.update",
+    "module": "sales",
+    "entity": "tags",
+    "action": "update",
+    "label": "Update Tags"
+  },
+  {
+    "id": "sales.tax-rates.create",
+    "module": "sales",
+    "entity": "tax-rates",
+    "action": "create",
+    "label": "Create Tax-rates"
+  },
+  {
+    "id": "sales.tax-rates.delete",
+    "module": "sales",
+    "entity": "tax-rates",
+    "action": "delete",
+    "label": "Delete Tax-rates"
+  },
+  {
+    "id": "sales.tax-rates.update",
+    "module": "sales",
+    "entity": "tax-rates",
+    "action": "update",
+    "label": "Update Tax-rates"
+  },
+  {
+    "id": "staff.leave-requests.accept",
+    "module": "staff",
+    "entity": "leave-requests",
+    "action": "accept",
+    "label": "Accept Leave-requests"
+  },
+  {
+    "id": "staff.leave-requests.create",
+    "module": "staff",
+    "entity": "leave-requests",
+    "action": "create",
+    "label": "Create Leave-requests"
+  },
+  {
+    "id": "staff.leave-requests.delete",
+    "module": "staff",
+    "entity": "leave-requests",
+    "action": "delete",
+    "label": "Delete Leave-requests"
+  },
+  {
+    "id": "staff.leave-requests.reject",
+    "module": "staff",
+    "entity": "leave-requests",
+    "action": "reject",
+    "label": "Reject Leave-requests"
+  },
+  {
+    "id": "staff.leave-requests.update",
+    "module": "staff",
+    "entity": "leave-requests",
+    "action": "update",
+    "label": "Update Leave-requests"
+  },
+  {
+    "id": "staff.team-member-activities.create",
+    "module": "staff",
+    "entity": "team-member-activities",
+    "action": "create",
+    "label": "Create Team-member-activities"
+  },
+  {
+    "id": "staff.team-member-activities.delete",
+    "module": "staff",
+    "entity": "team-member-activities",
+    "action": "delete",
+    "label": "Delete Team-member-activities"
+  },
+  {
+    "id": "staff.team-member-activities.update",
+    "module": "staff",
+    "entity": "team-member-activities",
+    "action": "update",
+    "label": "Update Team-member-activities"
+  },
+  {
+    "id": "staff.team-member-addresses.create",
+    "module": "staff",
+    "entity": "team-member-addresses",
+    "action": "create",
+    "label": "Create Team-member-addresses"
+  },
+  {
+    "id": "staff.team-member-addresses.delete",
+    "module": "staff",
+    "entity": "team-member-addresses",
+    "action": "delete",
+    "label": "Delete Team-member-addresses"
+  },
+  {
+    "id": "staff.team-member-addresses.update",
+    "module": "staff",
+    "entity": "team-member-addresses",
+    "action": "update",
+    "label": "Update Team-member-addresses"
+  },
+  {
+    "id": "staff.team-member-comments.create",
+    "module": "staff",
+    "entity": "team-member-comments",
+    "action": "create",
+    "label": "Create Team-member-comments"
+  },
+  {
+    "id": "staff.team-member-comments.delete",
+    "module": "staff",
+    "entity": "team-member-comments",
+    "action": "delete",
+    "label": "Delete Team-member-comments"
+  },
+  {
+    "id": "staff.team-member-comments.update",
+    "module": "staff",
+    "entity": "team-member-comments",
+    "action": "update",
+    "label": "Update Team-member-comments"
+  },
+  {
+    "id": "staff.team-member-job-histories.create",
+    "module": "staff",
+    "entity": "team-member-job-histories",
+    "action": "create",
+    "label": "Create Team-member-job-histories"
+  },
+  {
+    "id": "staff.team-member-job-histories.delete",
+    "module": "staff",
+    "entity": "team-member-job-histories",
+    "action": "delete",
+    "label": "Delete Team-member-job-histories"
+  },
+  {
+    "id": "staff.team-member-job-histories.update",
+    "module": "staff",
+    "entity": "team-member-job-histories",
+    "action": "update",
+    "label": "Update Team-member-job-histories"
+  },
+  {
+    "id": "staff.team-members.create",
+    "module": "staff",
+    "entity": "team-members",
+    "action": "create",
+    "label": "Create Team-members"
+  },
+  {
+    "id": "staff.team-members.delete",
+    "module": "staff",
+    "entity": "team-members",
+    "action": "delete",
+    "label": "Delete Team-members"
+  },
+  {
+    "id": "staff.team-members.tags.assign",
+    "module": "staff",
+    "entity": "team-members",
+    "action": "tags",
+    "label": "Assign Tags"
+  },
+  {
+    "id": "staff.team-members.tags.unassign",
+    "module": "staff",
+    "entity": "team-members",
+    "action": "tags",
+    "label": "Unassign Tags"
+  },
+  {
+    "id": "staff.team-members.update",
+    "module": "staff",
+    "entity": "team-members",
+    "action": "update",
+    "label": "Update Team-members"
+  },
+  {
+    "id": "staff.team-roles.create",
+    "module": "staff",
+    "entity": "team-roles",
+    "action": "create",
+    "label": "Create Team-roles"
+  },
+  {
+    "id": "staff.team-roles.delete",
+    "module": "staff",
+    "entity": "team-roles",
+    "action": "delete",
+    "label": "Delete Team-roles"
+  },
+  {
+    "id": "staff.team-roles.update",
+    "module": "staff",
+    "entity": "team-roles",
+    "action": "update",
+    "label": "Update Team-roles"
+  },
+  {
+    "id": "staff.teams.create",
+    "module": "staff",
+    "entity": "teams",
+    "action": "create",
+    "label": "Create Teams"
+  },
+  {
+    "id": "staff.teams.delete",
+    "module": "staff",
+    "entity": "teams",
+    "action": "delete",
+    "label": "Delete Teams"
+  },
+  {
+    "id": "staff.teams.update",
+    "module": "staff",
+    "entity": "teams",
+    "action": "update",
+    "label": "Update Teams"
+  },
+  {
+    "id": "transports.tracking.register",
+    "module": "transports",
+    "entity": "tracking",
+    "action": "register",
+    "label": "Register Tracking"
+  }
+]

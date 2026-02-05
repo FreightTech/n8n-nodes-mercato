@@ -1,2 +1,4 @@
 # Generated files - run `npm run refresh:metadata` to regenerate
-*.json
+# commands.json and events.json are tracked so they're available for Docker builds
+# openapi.json is large and can be re-downloaded
+openapi.json

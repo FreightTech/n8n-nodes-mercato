@@ -1,0 +1,666 @@
+[
+  {
+    "id": "auth.roles.created",
+    "module": "auth",
+    "entity": "roles",
+    "category": "crud",
+    "label": "Role Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "auth.roles.deleted",
+    "module": "auth",
+    "entity": "roles",
+    "category": "crud",
+    "label": "Role Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "auth.roles.updated",
+    "module": "auth",
+    "entity": "roles",
+    "category": "crud",
+    "label": "Role Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "auth.user.created",
+    "module": "auth",
+    "entity": "users",
+    "category": "crud",
+    "label": "User Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "auth.user.deleted",
+    "module": "auth",
+    "entity": "users",
+    "category": "crud",
+    "label": "User Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "auth.user.updated",
+    "module": "auth",
+    "entity": "users",
+    "category": "crud",
+    "label": "User Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.category.created",
+    "module": "catalog",
+    "entity": "category",
+    "category": "crud",
+    "label": "Category Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.category.deleted",
+    "module": "catalog",
+    "entity": "category",
+    "category": "crud",
+    "label": "Category Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.category.updated",
+    "module": "catalog",
+    "entity": "category",
+    "category": "crud",
+    "label": "Category Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.price.created",
+    "module": "catalog",
+    "entity": "price",
+    "category": "crud",
+    "label": "Price Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.price.deleted",
+    "module": "catalog",
+    "entity": "price",
+    "category": "crud",
+    "label": "Price Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.price.updated",
+    "module": "catalog",
+    "entity": "price",
+    "category": "crud",
+    "label": "Price Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.product.created",
+    "module": "catalog",
+    "entity": "product",
+    "category": "crud",
+    "label": "Product Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.product.deleted",
+    "module": "catalog",
+    "entity": "product",
+    "category": "crud",
+    "label": "Product Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.product.updated",
+    "module": "catalog",
+    "entity": "product",
+    "category": "crud",
+    "label": "Product Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.variant.created",
+    "module": "catalog",
+    "entity": "variant",
+    "category": "crud",
+    "label": "Variant Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.variant.deleted",
+    "module": "catalog",
+    "entity": "variant",
+    "category": "crud",
+    "label": "Variant Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "catalog.variant.updated",
+    "module": "catalog",
+    "entity": "variant",
+    "category": "crud",
+    "label": "Variant Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.activities.created",
+    "module": "customers",
+    "entity": "activities",
+    "category": "crud",
+    "label": "Activity Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.activities.deleted",
+    "module": "customers",
+    "entity": "activities",
+    "category": "crud",
+    "label": "Activity Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.activities.updated",
+    "module": "customers",
+    "entity": "activities",
+    "category": "crud",
+    "label": "Activity Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.addresses.created",
+    "module": "customers",
+    "entity": "addresses",
+    "category": "crud",
+    "label": "Address Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.addresses.deleted",
+    "module": "customers",
+    "entity": "addresses",
+    "category": "crud",
+    "label": "Address Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.addresses.updated",
+    "module": "customers",
+    "entity": "addresses",
+    "category": "crud",
+    "label": "Address Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.comments.created",
+    "module": "customers",
+    "entity": "comments",
+    "category": "crud",
+    "label": "Comment Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.comments.deleted",
+    "module": "customers",
+    "entity": "comments",
+    "category": "crud",
+    "label": "Comment Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.comments.updated",
+    "module": "customers",
+    "entity": "comments",
+    "category": "crud",
+    "label": "Comment Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.companies.created",
+    "module": "customers",
+    "entity": "companies",
+    "category": "crud",
+    "label": "Customer (Company) Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.companies.deleted",
+    "module": "customers",
+    "entity": "companies",
+    "category": "crud",
+    "label": "Customer (Company) Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.companies.updated",
+    "module": "customers",
+    "entity": "companies",
+    "category": "crud",
+    "label": "Customer (Company) Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.deals.created",
+    "module": "customers",
+    "entity": "deals",
+    "category": "crud",
+    "label": "Deal Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.deals.deleted",
+    "module": "customers",
+    "entity": "deals",
+    "category": "crud",
+    "label": "Deal Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.deals.updated",
+    "module": "customers",
+    "entity": "deals",
+    "category": "crud",
+    "label": "Deal Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.people.created",
+    "module": "customers",
+    "entity": "people",
+    "category": "crud",
+    "label": "Customer (Person) Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.people.deleted",
+    "module": "customers",
+    "entity": "people",
+    "category": "crud",
+    "label": "Customer (Person) Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.people.updated",
+    "module": "customers",
+    "entity": "people",
+    "category": "crud",
+    "label": "Customer (Person) Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.tags.assigned",
+    "module": "customers",
+    "entity": "tags",
+    "category": "crud",
+    "label": "Tag Assigned",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.tags.created",
+    "module": "customers",
+    "entity": "tags",
+    "category": "crud",
+    "label": "Tag Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.tags.deleted",
+    "module": "customers",
+    "entity": "tags",
+    "category": "crud",
+    "label": "Tag Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.tags.removed",
+    "module": "customers",
+    "entity": "tags",
+    "category": "crud",
+    "label": "Tag Removed",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.tags.updated",
+    "module": "customers",
+    "entity": "tags",
+    "category": "crud",
+    "label": "Tag Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.todos.created",
+    "module": "customers",
+    "entity": "todos",
+    "category": "crud",
+    "label": "Todo Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.todos.deleted",
+    "module": "customers",
+    "entity": "todos",
+    "category": "crud",
+    "label": "Todo Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "customers.todos.updated",
+    "module": "customers",
+    "entity": "todos",
+    "category": "crud",
+    "label": "Todo Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "directory.organizations.created",
+    "module": "directory",
+    "entity": "organizations",
+    "category": "crud",
+    "label": "Organization Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "directory.organizations.deleted",
+    "module": "directory",
+    "entity": "organizations",
+    "category": "crud",
+    "label": "Organization Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "directory.organizations.updated",
+    "module": "directory",
+    "entity": "organizations",
+    "category": "crud",
+    "label": "Organization Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "directory.tenants.created",
+    "module": "directory",
+    "entity": "tenants",
+    "category": "crud",
+    "label": "Tenant Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "directory.tenants.deleted",
+    "module": "directory",
+    "entity": "tenants",
+    "category": "crud",
+    "label": "Tenant Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "directory.tenants.updated",
+    "module": "directory",
+    "entity": "tenants",
+    "category": "crud",
+    "label": "Tenant Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.configuration.created",
+    "module": "sales",
+    "entity": "configuration",
+    "category": "crud",
+    "label": "Configuration Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.configuration.deleted",
+    "module": "sales",
+    "entity": "configuration",
+    "category": "crud",
+    "label": "Configuration Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.configuration.updated",
+    "module": "sales",
+    "entity": "configuration",
+    "category": "crud",
+    "label": "Configuration Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.invoices.created",
+    "module": "sales",
+    "entity": "invoices",
+    "category": "crud",
+    "label": "Invoice Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.invoices.deleted",
+    "module": "sales",
+    "entity": "invoices",
+    "category": "crud",
+    "label": "Invoice Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.invoices.updated",
+    "module": "sales",
+    "entity": "invoices",
+    "category": "crud",
+    "label": "Invoice Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.lines.created",
+    "module": "sales",
+    "entity": "lines",
+    "category": "crud",
+    "label": "Order Line Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.lines.deleted",
+    "module": "sales",
+    "entity": "lines",
+    "category": "crud",
+    "label": "Order Line Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.lines.updated",
+    "module": "sales",
+    "entity": "lines",
+    "category": "crud",
+    "label": "Order Line Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.notes.created",
+    "module": "sales",
+    "entity": "notes",
+    "category": "crud",
+    "label": "Note Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.notes.deleted",
+    "module": "sales",
+    "entity": "notes",
+    "category": "crud",
+    "label": "Note Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.notes.updated",
+    "module": "sales",
+    "entity": "notes",
+    "category": "crud",
+    "label": "Note Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.orders.created",
+    "module": "sales",
+    "entity": "orders",
+    "category": "crud",
+    "label": "Sales Order Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.orders.deleted",
+    "module": "sales",
+    "entity": "orders",
+    "category": "crud",
+    "label": "Sales Order Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.orders.updated",
+    "module": "sales",
+    "entity": "orders",
+    "category": "crud",
+    "label": "Sales Order Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.payments.created",
+    "module": "sales",
+    "entity": "payments",
+    "category": "crud",
+    "label": "Payment Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.payments.deleted",
+    "module": "sales",
+    "entity": "payments",
+    "category": "crud",
+    "label": "Payment Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.payments.updated",
+    "module": "sales",
+    "entity": "payments",
+    "category": "crud",
+    "label": "Payment Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.quotes.created",
+    "module": "sales",
+    "entity": "quotes",
+    "category": "crud",
+    "label": "Quote Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.quotes.deleted",
+    "module": "sales",
+    "entity": "quotes",
+    "category": "crud",
+    "label": "Quote Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.quotes.updated",
+    "module": "sales",
+    "entity": "quotes",
+    "category": "crud",
+    "label": "Quote Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.shipments.created",
+    "module": "sales",
+    "entity": "shipments",
+    "category": "crud",
+    "label": "Shipment Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.shipments.deleted",
+    "module": "sales",
+    "entity": "shipments",
+    "category": "crud",
+    "label": "Shipment Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "sales.shipments.updated",
+    "module": "sales",
+    "entity": "shipments",
+    "category": "crud",
+    "label": "Shipment Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.definitions.created",
+    "module": "workflows",
+    "entity": "definitions",
+    "category": "crud",
+    "label": "Workflow Definition Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.definitions.deleted",
+    "module": "workflows",
+    "entity": "definitions",
+    "category": "crud",
+    "label": "Workflow Definition Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.definitions.updated",
+    "module": "workflows",
+    "entity": "definitions",
+    "category": "crud",
+    "label": "Workflow Definition Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.instances.created",
+    "module": "workflows",
+    "entity": "instances",
+    "category": "crud",
+    "label": "Workflow Instance Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.instances.deleted",
+    "module": "workflows",
+    "entity": "instances",
+    "category": "crud",
+    "label": "Workflow Instance Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.instances.updated",
+    "module": "workflows",
+    "entity": "instances",
+    "category": "crud",
+    "label": "Workflow Instance Updated",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.triggers.created",
+    "module": "workflows",
+    "entity": "triggers",
+    "category": "crud",
+    "label": "Trigger Created",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.triggers.deleted",
+    "module": "workflows",
+    "entity": "triggers",
+    "category": "crud",
+    "label": "Trigger Deleted",
+    "excludeFromTriggers": false
+  },
+  {
+    "id": "workflows.triggers.updated",
+    "module": "workflows",
+    "entity": "triggers",
+    "category": "crud",
+    "label": "Trigger Updated",
+    "excludeFromTriggers": false
+  }
+]
