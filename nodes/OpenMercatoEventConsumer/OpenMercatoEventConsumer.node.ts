@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import type {
 	ITriggerFunctions,
 	INodeType,
@@ -95,6 +96,30 @@ export class OpenMercatoEventConsumer implements INodeType {
 				description: 'Queue group name for load balancing across multiple n8n instances (optional)',
 				hint: 'Only one subscriber in the group receives each message',
 			},
+			{
+				displayName: 'Enable Deduplication',
+				name: 'enableDeduplication',
+				type: 'boolean',
+				default: false,
+				description:
+					'Whether to drop duplicate messages with identical content within a time window',
+			},
+			{
+				displayName: 'Deduplication Window (Seconds)',
+				name: 'deduplicationWindowSeconds',
+				type: 'number',
+				displayOptions: {
+					show: {
+						enableDeduplication: [true],
+					},
+				},
+				default: 2,
+				typeOptions: {
+					minValue: 1,
+					maxValue: 60,
+				},
+				description: 'Time window in seconds to consider messages as duplicates',
+			},
 		],
 	};
 
@@ -105,6 +130,12 @@ export class OpenMercatoEventConsumer implements INodeType {
 		const tenantId = credentials.tenantId as string;
 		const eventSource = this.getNodeParameter('eventSource') as string;
 		const queueGroup = this.getNodeParameter('queueGroup') as string;
+		const enableDeduplication = this.getNodeParameter('enableDeduplication') as boolean;
+		const deduplicationWindowMs = enableDeduplication
+			? (this.getNodeParameter('deduplicationWindowSeconds') as number) * 1000
+			: 0;
+		const seenMessages = new Map<string, number>();
+		let cleanupInterval: ReturnType<typeof setInterval> | null = null;
 
 		if (!tenantId) {
 			throw new ApplicationError('Tenant ID is required in credentials');
@@ -133,6 +164,8 @@ export class OpenMercatoEventConsumer implements INodeType {
 		let subscription: Subscription;
 
 		const closeFunction = async () => {
+			if (cleanupInterval) clearInterval(cleanupInterval);
+			seenMessages.clear();
 			if (subscription) {
 				try {
 					subscription.unsubscribe();
@@ -205,10 +238,32 @@ export class OpenMercatoEventConsumer implements INodeType {
 
 			nodeLogger.info(`Subscribed to: ${subjectPattern}`);
 
+			// Start deduplication cleanup interval
+			if (enableDeduplication) {
+				cleanupInterval = setInterval(() => {
+					const now = Date.now();
+					for (const [hash, ts] of seenMessages) {
+						if (now - ts > deduplicationWindowMs) seenMessages.delete(hash);
+					}
+				}, 60_000);
+			}
+
 			// Process messages asynchronously
 			(async () => {
 				for await (const msg of subscription) {
 					try {
+						// Deduplication check
+						if (enableDeduplication) {
+							const hash = createHash('sha256').update(msg.subject).update(msg.data).digest('hex');
+							const now = Date.now();
+							const lastSeen = seenMessages.get(hash);
+							if (lastSeen && now - lastSeen < deduplicationWindowMs) {
+								nodeLogger.warn(`Duplicate message skipped on ${msg.subject}`);
+								continue;
+							}
+							seenMessages.set(hash, now);
+						}
+
 						nodeLogger.info(`Received message on subject: ${msg.subject}`);
 
 						// Parse message data
