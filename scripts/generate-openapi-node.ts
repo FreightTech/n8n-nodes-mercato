@@ -13,10 +13,29 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { generateN8NNodes } from '@algolia/n8n-openapi-node';
 
-const SPEC_URL = 'https://openmercato.freighttech.org/api/docs/openapi';
+const DEFAULT_SPEC_URL = 'https://openmercato.freighttech.org/api/docs/openapi';
 const SPEC_PATH = path.resolve(__dirname, '../src/generated/openapi.json');
 const PROCESSED_SPEC_PATH = path.resolve(__dirname, '../src/generated/openapi-processed.json');
 const OUTPUT_PATH = path.resolve(__dirname, '../nodes/OpenMercatoRestApi/properties.ts');
+
+function getSpecUrl(): string {
+	const urlIndex = process.argv.indexOf('--url');
+	if (urlIndex !== -1 && process.argv[urlIndex + 1]) {
+		return process.argv[urlIndex + 1];
+	}
+	return DEFAULT_SPEC_URL;
+}
+
+function getFilterPatterns(): string[] {
+	const filterIndex = process.argv.indexOf('--filter');
+	if (filterIndex !== -1 && process.argv[filterIndex + 1]) {
+		return process.argv[filterIndex + 1].split(',').map((s) => s.trim().toLowerCase());
+	}
+	return [];
+}
+
+const SPEC_URL = getSpecUrl();
+const FILTER_PATTERNS = getFilterPatterns();
 
 async function downloadSpec(): Promise<void> {
 	console.log(`Downloading OpenAPI spec from ${SPEC_URL}...`);
@@ -92,9 +111,96 @@ function inlineRefs(
 	return obj;
 }
 
+/**
+ * Simplify anyOf patterns like [{ type: "null" }, { type: "string" }]
+ * into { type: "string", nullable: true } so the library can handle them.
+ */
+function simplifyAnyOf(spec: Record<string, unknown>, obj: unknown): unknown {
+	if (obj === null || obj === undefined) return obj;
+
+	if (Array.isArray(obj)) {
+		return obj.map((item) => simplifyAnyOf(spec, item));
+	}
+
+	if (typeof obj === 'object') {
+		const record = obj as Record<string, unknown>;
+
+		// Check for anyOf with nullable pattern
+		if (Array.isArray(record.anyOf) && record.anyOf.length === 2) {
+			// Resolve $refs in anyOf items first
+			const resolved = (record.anyOf as Array<Record<string, unknown>>).map((item) => {
+				if (typeof item['$ref'] === 'string') {
+					const ref = resolveRef(spec, item['$ref'] as string);
+					return ref && typeof ref === 'object' ? (ref as Record<string, unknown>) : item;
+				}
+				return item;
+			});
+			const nullItem = resolved.find((i) => i.type === 'null');
+			const realItem = resolved.find((i) => i.type !== 'null');
+			if (nullItem && realItem) {
+				// Replace anyOf with the non-null type + nullable
+				const { anyOf, ...rest } = record;
+				return simplifyAnyOf(spec, { ...rest, ...realItem, nullable: true });
+			}
+		}
+
+		// Recurse into all properties
+		const result: Record<string, unknown> = {};
+		for (const [key, value] of Object.entries(record)) {
+			result[key] = simplifyAnyOf(spec, value);
+		}
+		return result;
+	}
+
+	return obj;
+}
+
 function preprocessSpec(): void {
 	console.log('Pre-processing spec...');
 	const spec = JSON.parse(fs.readFileSync(SPEC_PATH, 'utf-8'));
+
+	// 0a. Filter paths by tag if --filter is provided
+	if (FILTER_PATTERNS.length > 0) {
+		console.log(`  Filtering endpoints by tags matching: ${FILTER_PATTERNS.join(', ')}`);
+		const originalCount = Object.keys(spec.paths || {}).length;
+		const filteredPaths: Record<string, unknown> = {};
+		for (const [pathKey, pathValue] of Object.entries(spec.paths || {})) {
+			const pathObj = pathValue as Record<string, unknown>;
+			let include = false;
+			for (const methodValue of Object.values(pathObj)) {
+				if (!methodValue || typeof methodValue !== 'object') continue;
+				const op = methodValue as Record<string, unknown>;
+				const tags = (op.tags as string[]) || [];
+				if (tags.some((tag) => FILTER_PATTERNS.some((pattern) => tag.toLowerCase().includes(pattern)))) {
+					include = true;
+					break;
+				}
+			}
+			if (include) {
+				filteredPaths[pathKey] = pathValue;
+			}
+		}
+		spec.paths = filteredPaths;
+		const filteredCount = Object.keys(filteredPaths).length;
+		console.log(`  Kept ${filteredCount} of ${originalCount} paths`);
+	}
+
+	// 0b. Simplify anyOf nullable patterns in component schemas and paths
+	console.log('  Simplifying anyOf nullable patterns...');
+	let anyOfCount = 0;
+	const before = JSON.stringify(spec);
+	if (spec.components?.schemas) {
+		spec.components.schemas = simplifyAnyOf(spec, spec.components.schemas);
+	}
+	if (spec.paths) {
+		spec.paths = simplifyAnyOf(spec, spec.paths);
+	}
+	const after = JSON.stringify(spec);
+	// Count how many anyOf patterns were simplified
+	const beforeCount = (before.match(/"anyOf"/g) || []).length;
+	const afterCount = (after.match(/"anyOf"/g) || []).length;
+	anyOfCount = beforeCount - afterCount;
+	console.log(`  Simplified ${anyOfCount} anyOf nullable patterns (${beforeCount} -> ${afterCount} remaining)`);
 
 	// 1. Inline all $ref references and fix parameter schemas
 	console.log('  Resolving $ref references and fixing schemas...');
@@ -171,10 +277,114 @@ function removePathPrefix(obj: unknown): unknown {
 	return obj;
 }
 
-async function generate(): Promise<void> {
-	const forceDownload = process.argv.includes('--download');
+/**
+ * Add a "Body Input Mode" toggle for POST/PUT operations, allowing users to
+ * switch between the generated form fields and a raw JSON body input.
+ */
+function addJsonBodyMode(properties: unknown[]): unknown[] {
+	type AnyRecord = Record<string, unknown>;
 
-	// Download spec if not present or --download flag
+	// 1. Collect all POST/PUT operation values and their resources from operation props
+	const postPutOps: Array<{ value: string; resource: string }> = [];
+	for (const prop of properties) {
+		const p = prop as AnyRecord;
+		if (p.name !== 'operation') continue;
+		const resource = ((p.displayOptions as AnyRecord)?.show as AnyRecord)?.resource as string[];
+		if (!resource?.[0]) continue;
+		for (const opt of (p.options as AnyRecord[]) || []) {
+			const method = ((opt.routing as AnyRecord)?.request as AnyRecord)?.method as string;
+			if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
+				postPutOps.push({ value: opt.value as string, resource: resource[0] });
+			}
+		}
+	}
+
+	if (postPutOps.length === 0) return properties;
+
+	// 2. Build a set of operation values for quick lookup
+	const postPutSet = new Set(postPutOps.map((o) => o.value));
+
+	// 3. Walk properties, inject input mode toggle + JSON field for each matching collection
+	const result: unknown[] = [];
+	const processed = new Set<string>();
+
+	for (const prop of properties) {
+		const p = prop as AnyRecord;
+
+		// Detect collection properties that send body fields for a POST/PUT operation
+		if (p.type === 'collection') {
+			const ops = ((p.displayOptions as AnyRecord)?.show as AnyRecord)?.operation as string[];
+			const resources = ((p.displayOptions as AnyRecord)?.show as AnyRecord)
+				?.resource as string[];
+			if (ops?.length === 1 && postPutSet.has(ops[0]) && !processed.has(ops[0])) {
+				const opValue = ops[0];
+				const resource = resources?.[0] || postPutOps.find((o) => o.value === opValue)!.resource;
+				processed.add(opValue);
+
+				// a) Input Mode toggle
+				result.push({
+					displayName: 'Body Input Mode',
+					name: `bodyInputMode_${opValue}`,
+					type: 'options',
+					default: 'fields',
+					description: 'Choose how to provide the request body',
+					options: [
+						{ name: 'Form Fields', value: 'fields' },
+						{ name: 'Raw JSON', value: 'json' },
+					],
+					displayOptions: {
+						show: { resource: [resource], operation: [opValue] },
+					},
+				});
+
+				// b) Existing collection — only show in "fields" mode
+				result.push({
+					...p,
+					displayOptions: {
+						show: {
+							...((p.displayOptions as AnyRecord)?.show as AnyRecord),
+							[`bodyInputMode_${opValue}`]: ['fields'],
+						},
+					},
+				});
+
+				// c) JSON body field — only show in "json" mode
+				result.push({
+					displayName: 'JSON Body',
+					name: `jsonBody_${opValue}`,
+					type: 'json',
+					default: '{}',
+					description: 'Raw JSON body to send with the request',
+					typeOptions: { rows: 10 },
+					displayOptions: {
+						show: {
+							resource: [resource],
+							operation: [opValue],
+							[`bodyInputMode_${opValue}`]: ['json'],
+						},
+					},
+					routing: {
+						request: {
+							body: '={{ typeof $value === "string" ? JSON.parse($value) : $value }}',
+						},
+					},
+				});
+
+				continue; // replaced the original collection
+			}
+		}
+
+		result.push(prop);
+	}
+
+	console.log(`Added JSON body mode for ${processed.size} POST/PUT/PATCH operations`);
+	return result;
+}
+
+async function generate(): Promise<void> {
+	const forceDownload = process.argv.includes('--download') || process.argv.includes('--url');
+
+	// Download spec if not present, --download flag, or --url provided
 	if (!fs.existsSync(SPEC_PATH) || forceDownload) {
 		await downloadSpec();
 	} else {
@@ -197,11 +407,14 @@ async function generate(): Promise<void> {
 	// Post-process: remove the /1/ prefix from routing URLs
 	const fixedProperties = removePathPrefix(properties);
 
+	// Post-process: add JSON body input mode for POST/PUT operations
+	const finalProperties = addJsonBodyMode(fixedProperties as unknown[]);
+
 	// Count resources and operations
 	const resourceProp = (
-		fixedProperties as Array<{ name: string; options?: Array<{ value: string }> }>
+		finalProperties as Array<{ name: string; options?: Array<{ value: string }> }>
 	).find((p) => p.name === 'resource');
-	const operationProps = (fixedProperties as Array<{ name: string }>).filter(
+	const operationProps = (finalProperties as Array<{ name: string }>).filter(
 		(p) => p.name === 'operation',
 	);
 
@@ -233,7 +446,7 @@ async function generate(): Promise<void> {
 
 import { INodeProperties } from 'n8n-workflow';
 
-const properties: INodeProperties[] = ${JSON.stringify(fixedProperties, null, '\t')};
+const properties: INodeProperties[] = ${JSON.stringify(finalProperties, null, '\t')};
 
 export default properties;
 `;
