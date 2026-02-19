@@ -1,7 +1,10 @@
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { NodeConnectionTypes } from 'n8n-workflow';
 
-import properties from './properties';
+import generatedProperties from './properties';
+import { patchUploadProperties } from './uploadPreSend';
+
+const properties = patchUploadProperties(generatedProperties);
 
 export class OpenMercatoRestApi implements INodeType {
 	description: INodeTypeDescription = {

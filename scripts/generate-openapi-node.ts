@@ -278,6 +278,15 @@ function removePathPrefix(obj: unknown): unknown {
 }
 
 /**
+ * Operations that use multipart/form-data file uploads.
+ * These are handled by uploadPreSend.ts at runtime, so we skip JSON body mode for them.
+ */
+const UPLOAD_OPERATIONS = new Set([
+	'fms_documents_post_fms_documents_upload',
+	'fms_documents_post_fms_documents_invoices_upload',
+]);
+
+/**
  * Add a "Body Input Mode" toggle for POST/PUT operations, allowing users to
  * switch between the generated form fields and a raw JSON body input.
  */
@@ -292,6 +301,7 @@ function addJsonBodyMode(properties: unknown[]): unknown[] {
 		const resource = ((p.displayOptions as AnyRecord)?.show as AnyRecord)?.resource as string[];
 		if (!resource?.[0]) continue;
 		for (const opt of (p.options as AnyRecord[]) || []) {
+			if (UPLOAD_OPERATIONS.has(opt.value as string)) continue;
 			const method = ((opt.routing as AnyRecord)?.request as AnyRecord)?.method as string;
 			if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
 				postPutOps.push({ value: opt.value as string, resource: resource[0] });
