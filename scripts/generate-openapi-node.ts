@@ -444,6 +444,7 @@ async function generate(): Promise<void> {
 
 	// Write TypeScript file
 	const fileContent = `/* eslint-disable */
+// @ts-nocheck
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
  *
