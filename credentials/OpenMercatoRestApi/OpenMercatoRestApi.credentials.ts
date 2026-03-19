@@ -38,7 +38,7 @@ export class OpenMercatoRestApi implements ICredentialType {
 		type: 'generic',
 		properties: {
 			headers: {
-				Authorization: '=Bearer {{$credentials.apiToken}}',
+				'x-api-key': '={{$credentials.apiToken}}',
 			},
 		},
 	};
