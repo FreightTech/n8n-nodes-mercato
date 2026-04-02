@@ -23,6 +23,8 @@ services:
       - TZ=UTC
       # Allow playwright-core in Code nodes
       - NODE_FUNCTION_ALLOW_EXTERNAL=playwright-core
+      # Disable sandbox prototype freezing so playwright-core can initialize
+      - N8N_RUNNERS_INSECURE_MODE=true
     volumes:
       # Mount built OpenMercato nodes (read-only)
       - ./dist:/home/node/.n8n/custom/n8n-nodes-openmercato:ro
