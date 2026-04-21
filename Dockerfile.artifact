@@ -1,0 +1,42 @@
+# Artifact-only build for use with the n8n-playwright shared-volume
+# custom-nodes installer pattern. See n8n-automations/n8n-playwright/CUSTOM_NODES.md.
+#
+# This image is not a runnable service — it is a one-shot install task.
+# A Dokploy "Application" built from this Dockerfile mounts the shared volume
+# at /custom-nodes and, on each redeploy, copies the built package into
+# /custom-nodes/${NODE_NAME}/ and exits 0. Configure the Dokploy app's restart
+# policy to "no" or "on-failure" so the clean exit doesn't re-trigger a loop.
+
+FROM node:22-alpine AS builder
+
+WORKDIR /build
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY tsconfig.json esbuild.config.mjs gulpfile.js ./
+COPY credentials/ credentials/
+COPY nodes/ nodes/
+COPY utils/ utils/
+COPY bundled/ bundled/
+COPY icons/ icons/
+COPY src/ src/
+COPY index.ts ./
+
+RUN npm run build
+
+FROM alpine:3.20
+
+RUN apk add --no-cache coreutils
+
+# /artifact is the ready-to-install package root — gulp build:package already
+# placed a prefix-stripped package.json inside dist/, so dist/ IS the package.
+COPY --from=builder /build/dist /artifact
+
+ENV NODE_NAME=n8n-nodes-openmercato
+
+CMD ["sh", "-c", "\
+  rm -rf /custom-nodes/$NODE_NAME && \
+  mkdir -p /custom-nodes/$NODE_NAME && \
+  cp -r /artifact/. /custom-nodes/$NODE_NAME/ && \
+  echo \"Installed $NODE_NAME\""]
