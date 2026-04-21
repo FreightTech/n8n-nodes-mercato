@@ -6,8 +6,8 @@
  * Generated from OpenMercato OpenAPI spec using @algolia/n8n-openapi-node
  * Run `npm run generate:openapi` to regenerate.
  *
- * Source: https://openmercato.freighttech.org/api/docs/openapi
- * Generated: 2026-03-19T10:42:26.454Z
+ * Source: https://dev.fms.freighttech.org/api/docs/openapi
+ * Generated: 2026-04-21T10:06:23.091Z
  */
 
 import { INodeProperties } from 'n8n-workflow';
@@ -38,11 +38,6 @@ const properties: INodeProperties[] = [
 				"name": "FMS Documents",
 				"value": "FMS Documents",
 				"description": "Unified document management with AI-powered OCR extraction, invoice processing, and charge code matching"
-			},
-			{
-				"name": "FMS Projects",
-				"value": "FMS Projects",
-				"description": "Shipping project management with workflow orchestration"
 			},
 			{
 				"name": "Fms Teams",
@@ -139,6 +134,30 @@ const properties: INodeProperties[] = [
 					"request": {
 						"method": "DELETE",
 						"url": "=/fms_offers/notes"
+					}
+				}
+			},
+			{
+				"name": "GET /fms_offers/offer-group-pdf",
+				"value": "fms_offers_get_fms_offers_offer_group_pdf",
+				"action": "GET /fms_offers/offer-group-pdf",
+				"description": "Requires features: fms_offers.offers.view",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/fms_offers/offer-group-pdf"
+					}
+				}
+			},
+			{
+				"name": "GET /fms_offers/offer-group-preview-images",
+				"value": "fms_offers_get_fms_offers_offer_group_preview_images",
+				"action": "GET /fms_offers/offer-group-preview-images",
+				"description": "Requires features: fms_offers.offers.view",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/fms_offers/offer-group-preview-images"
 					}
 				}
 			},
@@ -247,6 +266,18 @@ const properties: INodeProperties[] = [
 					"request": {
 						"method": "POST",
 						"url": "=/fms_offers/rfq/extract"
+					}
+				}
+			},
+			{
+				"name": "Create an RFQ from raw email content",
+				"value": "fms_offers_post_fms_offers_rfq_from_email",
+				"action": "Create an RFQ from raw email content",
+				"description": "Single-step endpoint for email-to-RFQ conversion. Accepts raw email fields, cleans the text, extracts structured freight data via LLM, matches against tenant entities (locations, contractors), and persists the RFQ. Designed for n8n/webhook integration — replaces the two-call extract+create flow.",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/fms_offers/rfq/from-email"
 					}
 				}
 			},
@@ -415,6 +446,18 @@ const properties: INodeProperties[] = [
 					"request": {
 						"method": "POST",
 						"url": "=/fms_offers/offers/{{ $parameter.id_string }}/pdf"
+					}
+				}
+			},
+			{
+				"name": "GET /fms_offers/offers/{id}/preview-images",
+				"value": "fms_offers_get_fms_offers_offers_id_preview_images",
+				"action": "GET /fms_offers/offers/{id}/preview-images",
+				"description": "Requires features: fms_offers.offers.view",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/fms_offers/offers/{{ $parameter.id_string }}/preview-images"
 					}
 				}
 			},
@@ -1218,7 +1261,7 @@ const properties: INodeProperties[] = [
 				"name": "GET /fms_documents/documents/{id}/extract",
 				"value": "fms_documents_get_fms_documents_documents_id_extract",
 				"action": "GET /fms_documents/documents/{id}/extract",
-				"description": "GET /fms_documents/documents/{id}/extract",
+				"description": "Requires features: fms_documents.manage",
 				"routing": {
 					"request": {
 						"method": "GET",
@@ -1335,6 +1378,54 @@ const properties: INodeProperties[] = [
 				}
 			},
 			{
+				"name": "DELETE /fms_documents/invoices/{id}/allocations/{allocationId}",
+				"value": "fms_documents_delete_fms_documents_invoices_id_allocations_allocationId",
+				"action": "DELETE /fms_documents/invoices/{id}/allocations/{allocationId}",
+				"description": "Requires features: fms_documents.invoices.manage",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/allocations/{{ $parameter.allocationId_string }}"
+					}
+				}
+			},
+			{
+				"name": "GET /fms_documents/invoices/{id}/allocations",
+				"value": "fms_documents_get_fms_documents_invoices_id_allocations",
+				"action": "GET /fms_documents/invoices/{id}/allocations",
+				"description": "Requires features: fms_documents.invoices.view",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/allocations"
+					}
+				}
+			},
+			{
+				"name": "POST /fms_documents/invoices/{id}/allocations",
+				"value": "fms_documents_post_fms_documents_invoices_id_allocations",
+				"action": "POST /fms_documents/invoices/{id}/allocations",
+				"description": "Requires features: fms_documents.invoices.manage",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/allocations"
+					}
+				}
+			},
+			{
+				"name": "POST /fms_documents/invoices/{id}/confirm",
+				"value": "fms_documents_post_fms_documents_invoices_id_confirm",
+				"action": "POST /fms_documents/invoices/{id}/confirm",
+				"description": "Requires features: fms_documents.invoices.manage",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/confirm"
+					}
+				}
+			},
+			{
 				"name": "POST /fms_documents/invoices/{id}/extract",
 				"value": "fms_documents_post_fms_documents_invoices_id_extract",
 				"action": "POST /fms_documents/invoices/{id}/extract",
@@ -1419,6 +1510,30 @@ const properties: INodeProperties[] = [
 				}
 			},
 			{
+				"name": "GET /fms_documents/invoices/{id}/match-contractors",
+				"value": "fms_documents_get_fms_documents_invoices_id_match_contractors",
+				"action": "GET /fms_documents/invoices/{id}/match-contractors",
+				"description": "Requires features: fms_documents.invoices.view",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/match-contractors"
+					}
+				}
+			},
+			{
+				"name": "POST /fms_documents/invoices/{id}/match-contractors",
+				"value": "fms_documents_post_fms_documents_invoices_id_match_contractors",
+				"action": "POST /fms_documents/invoices/{id}/match-contractors",
+				"description": "Requires features: fms_documents.invoices.manage",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/match-contractors"
+					}
+				}
+			},
+			{
 				"name": "GET /fms_documents/invoices/{id}/pages/{pageNum}/image",
 				"value": "fms_documents_get_fms_documents_invoices_id_pages_pageNum_image",
 				"action": "GET /fms_documents/invoices/{id}/pages/{pageNum}/image",
@@ -1439,6 +1554,18 @@ const properties: INodeProperties[] = [
 					"request": {
 						"method": "GET",
 						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/pages"
+					}
+				}
+			},
+			{
+				"name": "GET /fms_documents/invoices/{id}/project-lines",
+				"value": "fms_documents_get_fms_documents_invoices_id_project_lines",
+				"action": "GET /fms_documents/invoices/{id}/project-lines",
+				"description": "Requires features: fms_documents.invoices.view",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/project-lines"
 					}
 				}
 			},
@@ -1489,668 +1616,16 @@ const properties: INodeProperties[] = [
 						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}"
 					}
 				}
-			}
-		],
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Documents"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Operation",
-		"name": "operation",
-		"type": "options",
-		"default": "",
-		"description": "Select the operation to work with",
-		"options": [
-			{
-				"name": "GET /fms_projects/projects",
-				"value": "fms_projects_get_fms_projects_projects",
-				"action": "GET /fms_projects/projects",
-				"description": "Requires features: fms_projects.projects.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects"
-					}
-				}
 			},
 			{
-				"name": "POST /fms_projects/projects",
-				"value": "fms_projects_post_fms_projects_projects",
-				"action": "POST /fms_projects/projects",
-				"description": "Requires features: fms_projects.projects.manage",
+				"name": "POST /fms_documents/invoices/{id}/toggle-exclude",
+				"value": "fms_documents_post_fms_documents_invoices_id_toggle_exclude",
+				"action": "POST /fms_documents/invoices/{id}/toggle-exclude",
+				"description": "Requires features: fms_documents.invoices.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/fms_projects/projects"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects",
-				"value": "fms_projects_put_fms_projects_projects",
-				"action": "PUT /fms_projects/projects",
-				"description": "Requires features: fms_projects.projects.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects",
-				"value": "fms_projects_delete_fms_projects_projects",
-				"action": "DELETE /fms_projects/projects",
-				"description": "Requires features: fms_projects.projects.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/activity",
-				"value": "fms_projects_get_fms_projects_projects_id_activity",
-				"action": "GET /fms_projects/projects/{id}/activity",
-				"description": "Requires features: fms_projects.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/activity"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/air-units",
-				"value": "fms_projects_get_fms_projects_projects_id_air_units",
-				"action": "GET /fms_projects/projects/{id}/air-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/air-units"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/air-units",
-				"value": "fms_projects_post_fms_projects_projects_id_air_units",
-				"action": "POST /fms_projects/projects/{id}/air-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/air-units"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/air-units",
-				"value": "fms_projects_put_fms_projects_projects_id_air_units",
-				"action": "PUT /fms_projects/projects/{id}/air-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/air-units"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/air-units",
-				"value": "fms_projects_delete_fms_projects_projects_id_air_units",
-				"action": "DELETE /fms_projects/projects/{id}/air-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/air-units"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/cargo",
-				"value": "fms_projects_get_fms_projects_projects_id_cargo",
-				"action": "GET /fms_projects/projects/{id}/cargo",
-				"description": "Requires features: fms_projects.cargo.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/cargo"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/cargo",
-				"value": "fms_projects_post_fms_projects_projects_id_cargo",
-				"action": "POST /fms_projects/projects/{id}/cargo",
-				"description": "Requires features: fms_projects.cargo.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/cargo"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/cargo",
-				"value": "fms_projects_put_fms_projects_projects_id_cargo",
-				"action": "PUT /fms_projects/projects/{id}/cargo",
-				"description": "Requires features: fms_projects.cargo.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/cargo"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/cargo",
-				"value": "fms_projects_delete_fms_projects_projects_id_cargo",
-				"action": "DELETE /fms_projects/projects/{id}/cargo",
-				"description": "Requires features: fms_projects.cargo.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/cargo"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/containers",
-				"value": "fms_projects_get_fms_projects_projects_id_containers",
-				"action": "GET /fms_projects/projects/{id}/containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/containers"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/containers",
-				"value": "fms_projects_post_fms_projects_projects_id_containers",
-				"action": "POST /fms_projects/projects/{id}/containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/containers"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/containers",
-				"value": "fms_projects_put_fms_projects_projects_id_containers",
-				"action": "PUT /fms_projects/projects/{id}/containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/containers"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/containers",
-				"value": "fms_projects_delete_fms_projects_projects_id_containers",
-				"action": "DELETE /fms_projects/projects/{id}/containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/containers"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/detail",
-				"value": "fms_projects_get_fms_projects_projects_id_detail",
-				"action": "GET /fms_projects/projects/{id}/detail",
-				"description": "GET /fms_projects/projects/{id}/detail",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/detail"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/documents",
-				"value": "fms_projects_get_fms_projects_projects_id_documents",
-				"action": "GET /fms_projects/projects/{id}/documents",
-				"description": "Requires features: fms_projects.projects.view, fms_documents.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/documents"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/documents",
-				"value": "fms_projects_post_fms_projects_projects_id_documents",
-				"action": "POST /fms_projects/projects/{id}/documents",
-				"description": "Requires features: fms_projects.projects.manage, fms_documents.upload",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/documents"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/import-tracking",
-				"value": "fms_projects_post_fms_projects_projects_id_import_tracking",
-				"action": "POST /fms_projects/projects/{id}/import-tracking",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/import-tracking"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/invoices",
-				"value": "fms_projects_get_fms_projects_projects_id_invoices",
-				"action": "GET /fms_projects/projects/{id}/invoices",
-				"description": "Requires features: fms_projects.projects.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/invoices"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/invoices",
-				"value": "fms_projects_put_fms_projects_projects_id_invoices",
-				"action": "PUT /fms_projects/projects/{id}/invoices",
-				"description": "Requires features: fms_projects.projects.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/invoices"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/legs",
-				"value": "fms_projects_get_fms_projects_projects_id_legs",
-				"action": "GET /fms_projects/projects/{id}/legs",
-				"description": "Requires features: fms_projects.legs.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/legs"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/legs",
-				"value": "fms_projects_post_fms_projects_projects_id_legs",
-				"action": "POST /fms_projects/projects/{id}/legs",
-				"description": "Requires features: fms_projects.legs.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/legs"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/legs",
-				"value": "fms_projects_put_fms_projects_projects_id_legs",
-				"action": "PUT /fms_projects/projects/{id}/legs",
-				"description": "Requires features: fms_projects.legs.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/legs"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/legs",
-				"value": "fms_projects_delete_fms_projects_projects_id_legs",
-				"action": "DELETE /fms_projects/projects/{id}/legs",
-				"description": "Requires features: fms_projects.legs.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/legs"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/lines/{lineId}",
-				"value": "fms_projects_get_fms_projects_projects_id_lines_lineId",
-				"action": "GET /fms_projects/projects/{id}/lines/{lineId}",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines/{{ $parameter.lineId_string }}"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/lines/{lineId}",
-				"value": "fms_projects_put_fms_projects_projects_id_lines_lineId",
-				"action": "PUT /fms_projects/projects/{id}/lines/{lineId}",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines/{{ $parameter.lineId_string }}"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/lines/{lineId}",
-				"value": "fms_projects_delete_fms_projects_projects_id_lines_lineId",
-				"action": "DELETE /fms_projects/projects/{id}/lines/{lineId}",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines/{{ $parameter.lineId_string }}"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/lines",
-				"value": "fms_projects_get_fms_projects_projects_id_lines",
-				"action": "GET /fms_projects/projects/{id}/lines",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/lines",
-				"value": "fms_projects_post_fms_projects_projects_id_lines",
-				"action": "POST /fms_projects/projects/{id}/lines",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/lines",
-				"value": "fms_projects_put_fms_projects_projects_id_lines",
-				"action": "PUT /fms_projects/projects/{id}/lines",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/lines",
-				"value": "fms_projects_delete_fms_projects_projects_id_lines",
-				"action": "DELETE /fms_projects/projects/{id}/lines",
-				"description": "Requires features: fms_projects.lines.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/lines"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/link-offer",
-				"value": "fms_projects_post_fms_projects_projects_id_link_offer",
-				"action": "POST /fms_projects/projects/{id}/link-offer",
-				"description": "Requires features: fms_projects.projects.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/link-offer"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/matched-documents",
-				"value": "fms_projects_get_fms_projects_projects_id_matched_documents",
-				"action": "GET /fms_projects/projects/{id}/matched-documents",
-				"description": "Requires features: fms_projects.projects.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/matched-documents"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/notes",
-				"value": "fms_projects_get_fms_projects_projects_id_notes",
-				"action": "GET /fms_projects/projects/{id}/notes",
-				"description": "Requires features: fms_projects.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/notes"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/notes",
-				"value": "fms_projects_post_fms_projects_projects_id_notes",
-				"action": "POST /fms_projects/projects/{id}/notes",
-				"description": "Requires features: fms_projects.edit",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/notes"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/notes",
-				"value": "fms_projects_put_fms_projects_projects_id_notes",
-				"action": "PUT /fms_projects/projects/{id}/notes",
-				"description": "Requires features: fms_projects.edit",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/notes"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/notes",
-				"value": "fms_projects_delete_fms_projects_projects_id_notes",
-				"action": "DELETE /fms_projects/projects/{id}/notes",
-				"description": "Requires features: fms_projects.edit",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/notes"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/road-units",
-				"value": "fms_projects_get_fms_projects_projects_id_road_units",
-				"action": "GET /fms_projects/projects/{id}/road-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/road-units"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/road-units",
-				"value": "fms_projects_post_fms_projects_projects_id_road_units",
-				"action": "POST /fms_projects/projects/{id}/road-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/road-units"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/road-units",
-				"value": "fms_projects_put_fms_projects_projects_id_road_units",
-				"action": "PUT /fms_projects/projects/{id}/road-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/road-units"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/road-units",
-				"value": "fms_projects_delete_fms_projects_projects_id_road_units",
-				"action": "DELETE /fms_projects/projects/{id}/road-units",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/road-units"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}",
-				"value": "fms_projects_get_fms_projects_projects_id",
-				"action": "GET /fms_projects/projects/{id}",
-				"description": "Requires features: fms_projects.projects.view",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}",
-				"value": "fms_projects_put_fms_projects_projects_id",
-				"action": "PUT /fms_projects/projects/{id}",
-				"description": "Requires features: fms_projects.projects.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}",
-				"value": "fms_projects_delete_fms_projects_projects_id",
-				"action": "DELETE /fms_projects/projects/{id}",
-				"description": "Requires features: fms_projects.projects.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/sea-containers/{containerId}",
-				"value": "fms_projects_get_fms_projects_projects_id_sea_containers_containerId",
-				"action": "GET /fms_projects/projects/{id}/sea-containers/{containerId}",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers/{{ $parameter.containerId_string }}"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/sea-containers/{containerId}",
-				"value": "fms_projects_put_fms_projects_projects_id_sea_containers_containerId",
-				"action": "PUT /fms_projects/projects/{id}/sea-containers/{containerId}",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers/{{ $parameter.containerId_string }}"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/sea-containers/{containerId}",
-				"value": "fms_projects_delete_fms_projects_projects_id_sea_containers_containerId",
-				"action": "DELETE /fms_projects/projects/{id}/sea-containers/{containerId}",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers/{{ $parameter.containerId_string }}"
-					}
-				}
-			},
-			{
-				"name": "GET /fms_projects/projects/{id}/sea-containers",
-				"value": "fms_projects_get_fms_projects_projects_id_sea_containers",
-				"action": "GET /fms_projects/projects/{id}/sea-containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers"
-					}
-				}
-			},
-			{
-				"name": "POST /fms_projects/projects/{id}/sea-containers",
-				"value": "fms_projects_post_fms_projects_projects_id_sea_containers",
-				"action": "POST /fms_projects/projects/{id}/sea-containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers"
-					}
-				}
-			},
-			{
-				"name": "PUT /fms_projects/projects/{id}/sea-containers",
-				"value": "fms_projects_put_fms_projects_projects_id_sea_containers",
-				"action": "PUT /fms_projects/projects/{id}/sea-containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "PUT",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers"
-					}
-				}
-			},
-			{
-				"name": "DELETE /fms_projects/projects/{id}/sea-containers",
-				"value": "fms_projects_delete_fms_projects_projects_id_sea_containers",
-				"action": "DELETE /fms_projects/projects/{id}/sea-containers",
-				"description": "Requires features: fms_projects.containers.manage",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/fms_projects/projects/{{ $parameter.id_string }}/sea-containers"
+						"url": "=/fms_documents/invoices/{{ $parameter.id_string }}/toggle-exclude"
 					}
 				}
 			}
@@ -2158,7 +1633,7 @@ const properties: INodeProperties[] = [
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"FMS Projects"
+					"FMS Documents"
 				]
 			}
 		}
@@ -2360,6 +1835,40 @@ const properties: INodeProperties[] = [
 	{
 		"type": "string",
 		"default": "",
+		"displayName": "Allocation Id",
+		"name": "allocationId_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
+					"fms_documents_delete_fms_documents_invoices_id_allocations_allocationId"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
+					"fms_documents_delete_fms_documents_invoices_id_allocations_allocationId"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
 		"displayName": "Id",
 		"name": "id_string",
 		"required": true,
@@ -2539,6 +2048,23 @@ const properties: INodeProperties[] = [
 					"FMS Documents"
 				],
 				"operation": [
+					"fms_documents_get_fms_documents_invoices_id_allocations"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
 					"fms_documents_get_fms_documents_invoices_id_line_items_lineItemId"
 				]
 			}
@@ -2590,6 +2116,23 @@ const properties: INodeProperties[] = [
 					"FMS Documents"
 				],
 				"operation": [
+					"fms_documents_get_fms_documents_invoices_id_match_contractors"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
 					"fms_documents_get_fms_documents_invoices_id_pages"
 				]
 			}
@@ -2625,6 +2168,23 @@ const properties: INodeProperties[] = [
 				],
 				"operation": [
 					"fms_documents_get_fms_documents_invoices_id_pages_pageNum_image"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
+					"fms_documents_get_fms_documents_invoices_id_project_lines"
 				]
 			}
 		}
@@ -2743,6 +2303,40 @@ const properties: INodeProperties[] = [
 					"FMS Documents"
 				],
 				"operation": [
+					"fms_documents_post_fms_documents_invoices_id_allocations"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
+					"fms_documents_post_fms_documents_invoices_id_confirm"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
 					"fms_documents_post_fms_documents_invoices_id_extract"
 				]
 			}
@@ -2778,6 +2372,40 @@ const properties: INodeProperties[] = [
 				],
 				"operation": [
 					"fms_documents_post_fms_documents_invoices_id_match_charges"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
+					"fms_documents_post_fms_documents_invoices_id_match_contractors"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Documents"
+				],
+				"operation": [
+					"fms_documents_post_fms_documents_invoices_id_toggle_exclude"
 				]
 			}
 		}
@@ -3464,6 +3092,23 @@ const properties: INodeProperties[] = [
 				],
 				"operation": [
 					"fms_offers_get_fms_offers_offers_id_pdf"
+				]
+			}
+		}
+	},
+	{
+		"type": "string",
+		"default": "",
+		"displayName": "Id",
+		"name": "id_string",
+		"required": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Offers"
+				],
+				"operation": [
+					"fms_offers_get_fms_offers_offers_id_preview_images"
 				]
 			}
 		}
@@ -4286,6 +3931,125 @@ const properties: INodeProperties[] = [
 		}
 	},
 	{
+		"displayName": "Body Input Mode",
+		"name": "bodyInputMode_fms_offers_post_fms_offers_rfq_from_email",
+		"type": "options",
+		"default": "fields",
+		"description": "Choose how to provide the request body",
+		"options": [
+			{
+				"name": "Form Fields",
+				"value": "fields"
+			},
+			{
+				"name": "Raw JSON",
+				"value": "json"
+			}
+		],
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Offers"
+				],
+				"operation": [
+					"fms_offers_post_fms_offers_rfq_from_email"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Additional Properties",
+		"name": "additionalProperties",
+		"type": "collection",
+		"placeholder": "Add property",
+		"default": {},
+		"required": false,
+		"options": [
+			{
+				"type": "string",
+				"default": "",
+				"displayName": "From",
+				"name": "from_string"
+			},
+			{
+				"type": "json",
+				"name": "to",
+				"displayName": "To",
+				"default": ""
+			},
+			{
+				"type": "string",
+				"default": "",
+				"displayName": "Subject",
+				"name": "subject_string"
+			},
+			{
+				"type": "string",
+				"default": "",
+				"displayName": "Text",
+				"name": "text_string"
+			},
+			{
+				"type": "string",
+				"default": "",
+				"displayName": "Html",
+				"name": "html_string"
+			}
+		],
+		"routing": {
+			"request": {
+				"body": {
+					"from": "={{ $value.from_string }}",
+					"to": "={{ JSON.parse($value.to) }}",
+					"subject": "={{ $value.subject_string }}",
+					"text": "={{ $value.text_string }}",
+					"html": "={{ $value.html_string }}"
+				}
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Offers"
+				],
+				"operation": [
+					"fms_offers_post_fms_offers_rfq_from_email"
+				],
+				"bodyInputMode_fms_offers_post_fms_offers_rfq_from_email": [
+					"fields"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "JSON Body",
+		"name": "jsonBody_fms_offers_post_fms_offers_rfq_from_email",
+		"type": "json",
+		"default": "{}",
+		"description": "Raw JSON body to send with the request",
+		"typeOptions": {
+			"rows": 10
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"FMS Offers"
+				],
+				"operation": [
+					"fms_offers_post_fms_offers_rfq_from_email"
+				],
+				"bodyInputMode_fms_offers_post_fms_offers_rfq_from_email": [
+					"json"
+				]
+			}
+		},
+		"routing": {
+			"request": {
+				"body": "={{ typeof $value === \"string\" ? JSON.parse($value) : $value }}"
+			}
+		}
+	},
+	{
 		"type": "string",
 		"default": "",
 		"displayName": "Id",
@@ -4702,958 +4466,6 @@ const properties: INodeProperties[] = [
 		"routing": {
 			"request": {
 				"body": "={{ typeof $value === \"string\" ? JSON.parse($value) : $value }}"
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_air_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_cargo"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_legs"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_lines"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_lines_lineId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Line Id",
-		"name": "lineId_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_lines_lineId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_notes"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_road_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_sea_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Container Id",
-		"name": "containerId_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_sea_containers_containerId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_delete_fms_projects_projects_id_sea_containers_containerId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_activity"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_air_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_cargo"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_detail"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_documents"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_invoices"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_legs"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_lines"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_lines_lineId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Line Id",
-		"name": "lineId_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_lines_lineId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_matched_documents"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_notes"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_road_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_sea_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Container Id",
-		"name": "containerId_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_sea_containers_containerId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_get_fms_projects_projects_id_sea_containers_containerId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_air_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_cargo"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_documents"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_import_tracking"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_legs"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_lines"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_link_offer"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_notes"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_road_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_post_fms_projects_projects_id_sea_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_air_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_cargo"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_invoices"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_legs"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_lines"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_lines_lineId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Line Id",
-		"name": "lineId_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_lines_lineId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_notes"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_road_units"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_sea_containers"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Container Id",
-		"name": "containerId_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_sea_containers_containerId"
-				]
-			}
-		}
-	},
-	{
-		"type": "string",
-		"default": "",
-		"displayName": "Id",
-		"name": "id_string",
-		"required": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"FMS Projects"
-				],
-				"operation": [
-					"fms_projects_put_fms_projects_projects_id_sea_containers_containerId"
-				]
 			}
 		}
 	},
