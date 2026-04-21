@@ -1,0 +1,33 @@
+# One-shot installer for the n8n-playwright shared-volume custom-nodes pattern.
+#
+# Deploy this as a Dokploy "Compose" application pointed at this repo, with the
+# compose file path set to `docker-compose.installer.yml`. On each redeploy,
+# Dokploy rebuilds the image (via Dockerfile.artifact), runs the `installer`
+# service, which copies the built n8n-nodes-openmercato package into the
+# shared n8n_custom_nodes volume and exits 0.
+#
+# The `restart: "no"` policy is intentional — this is a one-shot install task,
+# not a long-running service. Do NOT deploy this as a Dokploy "Application"
+# (non-compose) app; those apps force `restart: unless-stopped` at the Dokploy
+# layer and would re-run the installer in an infinite loop.
+#
+# See n8n-automations/n8n-playwright/CUSTOM_NODES.md for the full architecture.
+
+services:
+  installer:
+    build:
+      context: .
+      dockerfile: Dockerfile.artifact
+    restart: 'no'
+    volumes:
+      - n8n_custom_nodes:/custom-nodes
+    # Optional: override which volume subdir this installer writes to.
+    # Defaults to the ENV NODE_NAME baked into Dockerfile.artifact
+    # (currently n8n-nodes-openmercato).
+    # environment:
+    #   NODE_NAME: n8n-nodes-openmercato
+
+volumes:
+  n8n_custom_nodes:
+    name: n8n_custom_nodes
+    external: true
