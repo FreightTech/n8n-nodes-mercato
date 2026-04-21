@@ -28,6 +28,12 @@ services:
     #   NODE_NAME: n8n-nodes-openmercato
 
 volumes:
+  # Shared across Dokploy apps — the explicit `name:` ensures every stack
+  # that references "n8n_custom_nodes" lands on the same Docker volume
+  # regardless of compose project name. We intentionally do NOT set
+  # `external: true` here so the first installer deploy auto-creates the
+  # volume; the n8n-playwright stack then finds it by name. Docker won't
+  # delete a volume that is still in use by another container, so there
+  # is no risk of one stack's `down --volumes` wiping shared data.
   n8n_custom_nodes:
     name: n8n_custom_nodes
-    external: true
