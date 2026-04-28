@@ -5,7 +5,7 @@ import type { IHttpRequestOptions, INodeProperties } from 'n8n-workflow';
  * Upload operation identifiers that need multipart/form-data handling.
  */
 const UPLOAD_OPERATIONS = [
-	'freight_documents_post_api_freight_documents_upload',
+	'freight_documents_post_freight_documents_upload',
 ];
 
 /**

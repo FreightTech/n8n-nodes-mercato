@@ -7,7 +7,7 @@
  * Run `npm run generate:openapi` to regenerate.
  *
  * Source: https://openmercato.freighttech.org/api/docs/openapi
- * Generated: 2026-04-28T09:13:31.203Z
+ * Generated: 2026-04-28T10:43:44.004Z
  */
 
 import { INodeProperties } from 'n8n-workflow';
@@ -35,49 +35,49 @@ const properties: INodeProperties[] = [
 		"options": [
 			{
 				"name": "Create a calculation for an offer",
-				"value": "offers_post_api_offers_calculations",
+				"value": "offers_post_offers_calculations",
 				"action": "Create a calculation for an offer",
 				"description": "Requires features: offers.offers.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/offers/calculations"
+						"url": "=/offers/calculations"
 					}
 				}
 			},
 			{
 				"name": "Fetch pending response offers metrics",
-				"value": "offers_get_api_offers_dashboard_widgets_pending_response_offers",
+				"value": "offers_get_offers_dashboard_widgets_pending_response_offers",
 				"action": "Fetch pending response offers metrics",
 				"description": "Returns count, max lag time, and trend for sent offers pending customer response within the scoped tenant/organization.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/offers/dashboard/widgets/pending-response-offers"
+						"url": "=/offers/dashboard/widgets/pending-response-offers"
 					}
 				}
 			},
 			{
 				"name": "Fetch unsent offers metrics",
-				"value": "offers_get_api_offers_dashboard_widgets_unsent_offers",
+				"value": "offers_get_offers_dashboard_widgets_unsent_offers",
 				"action": "Fetch unsent offers metrics",
 				"description": "Returns count, max lag time, and trend for unsent offers within the scoped tenant/organization.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/offers/dashboard/widgets/unsent-offers"
+						"url": "=/offers/dashboard/widgets/unsent-offers"
 					}
 				}
 			},
 			{
 				"name": "Get RFQ by ID",
-				"value": "offers_get_api_offers_rfq_id",
+				"value": "offers_get_offers_rfq_id",
 				"action": "Get RFQ by ID",
 				"description": "Returns a single RFQ with its associated offers.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/offers/rfq/{{ $parameter.id_string }}"
+						"url": "=/offers/rfq/{{ $parameter.id_string }}"
 					}
 				},
 				"inputSchema": {
@@ -97,13 +97,13 @@ const properties: INodeProperties[] = [
 			},
 			{
 				"name": "Update RFQ",
-				"value": "offers_put_api_offers_rfq_id",
+				"value": "offers_put_offers_rfq_id",
 				"action": "Update RFQ",
 				"description": "Updates an existing RFQ by ID.",
 				"routing": {
 					"request": {
 						"method": "PUT",
-						"url": "=/api/offers/rfq/{{ $parameter.id_string }}"
+						"url": "=/offers/rfq/{{ $parameter.id_string }}"
 					}
 				},
 				"inputSchema": {
@@ -123,85 +123,85 @@ const properties: INodeProperties[] = [
 			},
 			{
 				"name": "Delete RFQ",
-				"value": "offers_delete_api_offers_rfq_id",
+				"value": "offers_delete_offers_rfq_id",
 				"action": "Delete RFQ",
 				"description": "Soft-deletes an RFQ by ID.",
 				"routing": {
 					"request": {
 						"method": "DELETE",
-						"url": "=/api/offers/rfq/{{ $parameter.id_string }}"
+						"url": "=/offers/rfq/{{ $parameter.id_string }}"
 					}
 				}
 			},
 			{
 				"name": "Get RFQ board cards",
-				"value": "offers_get_api_offers_rfq_board",
+				"value": "offers_get_offers_rfq_board",
 				"action": "Get RFQ board cards",
 				"description": "Returns all RFQs formatted as board cards with assignee info and latest offer details.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/offers/rfq/board"
+						"url": "=/offers/rfq/board"
 					}
 				}
 			},
 			{
 				"name": "Extract structured RFQ data from text",
-				"value": "offers_post_api_offers_rfq_extract",
+				"value": "offers_post_offers_rfq_extract",
 				"action": "Extract structured RFQ data from text",
 				"description": "Uses an LLM to extract structured freight data (company, routes, containers, cargo) from raw email/message text. Does not persist anything.",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/offers/rfq/extract"
+						"url": "=/offers/rfq/extract"
 					}
 				}
 			},
 			{
 				"name": "Extract charge lines from carrier rate text or image",
-				"value": "offers_post_api_offers_rfq_extract_charges",
+				"value": "offers_post_offers_rfq_extract_charges",
 				"action": "Extract charge lines from carrier rate text or image",
 				"description": "Uses an LLM to extract structured freight charge lines (product name, charge code, basis, currency, rate, buy price, category) from raw carrier rate text or an image screenshot. Does not persist anything.",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/offers/rfq/extract-charges"
+						"url": "=/offers/rfq/extract-charges"
 					}
 				}
 			},
 			{
 				"name": "Create an RFQ from raw email content",
-				"value": "offers_post_api_offers_rfq_from_email",
+				"value": "offers_post_offers_rfq_from_email",
 				"action": "Create an RFQ from raw email content",
 				"description": "Single-step endpoint for email-to-RFQ conversion. Accepts raw email fields, cleans the text, extracts structured freight data via LLM, matches against tenant entities (locations, contractors), and persists the RFQ. Designed for n8n/webhook integration — replaces the two-call extract+create flow.",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/offers/rfq/from-email"
+						"url": "=/offers/rfq/from-email"
 					}
 				}
 			},
 			{
 				"name": "List rfqs",
-				"value": "offers_get_api_offers_rfq",
+				"value": "offers_get_offers_rfq",
 				"action": "List rfqs",
 				"description": "Returns a paginated collection of rfqs scoped to the authenticated organization.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/offers/rfq"
+						"url": "=/offers/rfq"
 					}
 				}
 			},
 			{
 				"name": "Create rfq",
-				"value": "offers_post_api_offers_rfq",
+				"value": "offers_post_offers_rfq",
 				"action": "Create rfq",
 				"description": "Creates a new RFQ (Request for Quotation) scoped to the authenticated organization.",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/offers/rfq"
+						"url": "=/offers/rfq"
 					}
 				}
 			}
@@ -223,217 +223,217 @@ const properties: INodeProperties[] = [
 		"options": [
 			{
 				"name": "GET /api/freight_documents/documents/{id}/download",
-				"value": "freight_documents_get_api_freight_documents_documents_id_download",
+				"value": "freight_documents_get_freight_documents_documents_id_download",
 				"action": "GET /api/freight_documents/documents/{id}/download",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/download"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/download"
 					}
 				}
 			},
 			{
 				"name": "GET /api/freight_documents/documents/{id}/extract",
-				"value": "freight_documents_get_api_freight_documents_documents_id_extract",
+				"value": "freight_documents_get_freight_documents_documents_id_extract",
 				"action": "GET /api/freight_documents/documents/{id}/extract",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/extract"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/extract"
 					}
 				}
 			},
 			{
 				"name": "POST /api/freight_documents/documents/{id}/extract",
-				"value": "freight_documents_post_api_freight_documents_documents_id_extract",
+				"value": "freight_documents_post_freight_documents_documents_id_extract",
 				"action": "POST /api/freight_documents/documents/{id}/extract",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/extract"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/extract"
 					}
 				}
 			},
 			{
 				"name": "POST /api/freight_documents/documents/{id}/feedback",
-				"value": "freight_documents_post_api_freight_documents_documents_id_feedback",
+				"value": "freight_documents_post_freight_documents_documents_id_feedback",
 				"action": "POST /api/freight_documents/documents/{id}/feedback",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/feedback"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/feedback"
 					}
 				}
 			},
 			{
 				"name": "POST /api/freight_documents/documents/{id}/link",
-				"value": "freight_documents_post_api_freight_documents_documents_id_link",
+				"value": "freight_documents_post_freight_documents_documents_id_link",
 				"action": "POST /api/freight_documents/documents/{id}/link",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/link"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/link"
 					}
 				}
 			},
 			{
 				"name": "GET /api/freight_documents/documents/{id}/pages/{pageNum}/image",
-				"value": "freight_documents_get_api_freight_documents_documents_id_pages_pageNum_image",
+				"value": "freight_documents_get_freight_documents_documents_id_pages_pageNum_image",
 				"action": "GET /api/freight_documents/documents/{id}/pages/{pageNum}/image",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/pages/{{ $parameter.pageNum_string }}/image"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/pages/{{ $parameter.pageNum_string }}/image"
 					}
 				}
 			},
 			{
 				"name": "GET /api/freight_documents/documents/{id}/pages",
-				"value": "freight_documents_get_api_freight_documents_documents_id_pages",
+				"value": "freight_documents_get_freight_documents_documents_id_pages",
 				"action": "GET /api/freight_documents/documents/{id}/pages",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/pages"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/pages"
 					}
 				}
 			},
 			{
 				"name": "GET /api/freight_documents/documents/{id}",
-				"value": "freight_documents_get_api_freight_documents_documents_id",
+				"value": "freight_documents_get_freight_documents_documents_id",
 				"action": "GET /api/freight_documents/documents/{id}",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}"
 					}
 				}
 			},
 			{
 				"name": "PUT /api/freight_documents/documents/{id}",
-				"value": "freight_documents_put_api_freight_documents_documents_id",
+				"value": "freight_documents_put_freight_documents_documents_id",
 				"action": "PUT /api/freight_documents/documents/{id}",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "PUT",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}"
 					}
 				}
 			},
 			{
 				"name": "PATCH /api/freight_documents/documents/{id}",
-				"value": "freight_documents_patch_api_freight_documents_documents_id",
+				"value": "freight_documents_patch_freight_documents_documents_id",
 				"action": "PATCH /api/freight_documents/documents/{id}",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "PATCH",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}"
 					}
 				}
 			},
 			{
 				"name": "DELETE /api/freight_documents/documents/{id}",
-				"value": "freight_documents_delete_api_freight_documents_documents_id",
+				"value": "freight_documents_delete_freight_documents_documents_id",
 				"action": "DELETE /api/freight_documents/documents/{id}",
 				"description": "Requires features: freight_documents.delete",
 				"routing": {
 					"request": {
 						"method": "DELETE",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}"
 					}
 				}
 			},
 			{
 				"name": "PATCH /api/freight_documents/documents/{id}/sections/{sectionId}",
-				"value": "freight_documents_patch_api_freight_documents_documents_id_sections_sectionId",
+				"value": "freight_documents_patch_freight_documents_documents_id_sections_sectionId",
 				"action": "PATCH /api/freight_documents/documents/{id}/sections/{sectionId}",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "PATCH",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/sections/{{ $parameter.sectionId_string }}"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/sections/{{ $parameter.sectionId_string }}"
 					}
 				}
 			},
 			{
 				"name": "POST /api/freight_documents/documents/{id}/sections/{sectionId}/set-label",
-				"value": "freight_documents_post_api_freight_documents_documents_id_sections_sectionId_set_label",
+				"value": "freight_documents_post_freight_documents_documents_id_sections_sectionId_set_label",
 				"action": "POST /api/freight_documents/documents/{id}/sections/{sectionId}/set-label",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/sections/{{ $parameter.sectionId_string }}/set-label"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/sections/{{ $parameter.sectionId_string }}/set-label"
 					}
 				}
 			},
 			{
 				"name": "GET /api/freight_documents/documents/{id}/sections",
-				"value": "freight_documents_get_api_freight_documents_documents_id_sections",
+				"value": "freight_documents_get_freight_documents_documents_id_sections",
 				"action": "GET /api/freight_documents/documents/{id}/sections",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/sections"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/sections"
 					}
 				}
 			},
 			{
 				"name": "POST /api/freight_documents/documents/{id}/unlink",
-				"value": "freight_documents_post_api_freight_documents_documents_id_unlink",
+				"value": "freight_documents_post_freight_documents_documents_id_unlink",
 				"action": "POST /api/freight_documents/documents/{id}/unlink",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/documents/{{ $parameter.id_string }}/unlink"
+						"url": "=/freight_documents/documents/{{ $parameter.id_string }}/unlink"
 					}
 				}
 			},
 			{
 				"name": "GET /api/freight_documents/documents",
-				"value": "freight_documents_get_api_freight_documents_documents",
+				"value": "freight_documents_get_freight_documents_documents",
 				"action": "GET /api/freight_documents/documents",
 				"description": "Requires features: freight_documents.view",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/api/freight_documents/documents"
+						"url": "=/freight_documents/documents"
 					}
 				}
 			},
 			{
 				"name": "POST /api/freight_documents/documents",
-				"value": "freight_documents_post_api_freight_documents_documents",
+				"value": "freight_documents_post_freight_documents_documents",
 				"action": "POST /api/freight_documents/documents",
 				"description": "Requires features: freight_documents.manage",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/documents"
+						"url": "=/freight_documents/documents"
 					}
 				}
 			},
 			{
 				"name": "Upload document",
-				"value": "freight_documents_post_api_freight_documents_upload",
+				"value": "freight_documents_post_freight_documents_upload",
 				"action": "Upload document",
 				"description": "Upload a new FMS document with metadata. The file is stored as an attachment and PDF pages are extracted automatically.",
 				"routing": {
 					"request": {
 						"method": "POST",
-						"url": "=/api/freight_documents/upload"
+						"url": "=/freight_documents/upload"
 					}
 				}
 			}
@@ -458,7 +458,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_delete_api_offers_rfq_id"
+					"offers_delete_offers_rfq_id"
 				]
 			}
 		}
@@ -498,7 +498,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_get_api_offers_dashboard_widgets_pending_response_offers"
+					"offers_get_offers_dashboard_widgets_pending_response_offers"
 				]
 			}
 		}
@@ -538,7 +538,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_get_api_offers_dashboard_widgets_unsent_offers"
+					"offers_get_offers_dashboard_widgets_unsent_offers"
 				]
 			}
 		}
@@ -646,7 +646,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_get_api_offers_rfq"
+					"offers_get_offers_rfq"
 				]
 			}
 		}
@@ -663,7 +663,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_get_api_offers_rfq_id"
+					"offers_get_offers_rfq_id"
 				]
 			}
 		}
@@ -687,14 +687,14 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_calculations"
+					"offers_post_offers_calculations"
 				]
 			}
 		}
 	},
 	{
 		"displayName": "Body Input Mode",
-		"name": "bodyInputMode_offers_post_api_offers_calculations",
+		"name": "bodyInputMode_offers_post_offers_calculations",
 		"type": "options",
 		"default": "fields",
 		"description": "Choose how to provide the request body",
@@ -714,7 +714,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_calculations"
+					"offers_post_offers_calculations"
 				]
 			}
 		}
@@ -775,9 +775,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_calculations"
+					"offers_post_offers_calculations"
 				],
-				"bodyInputMode_offers_post_api_offers_calculations": [
+				"bodyInputMode_offers_post_offers_calculations": [
 					"fields"
 				]
 			}
@@ -785,7 +785,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "JSON Body",
-		"name": "jsonBody_offers_post_api_offers_calculations",
+		"name": "jsonBody_offers_post_offers_calculations",
 		"type": "json",
 		"default": "{}",
 		"description": "Raw JSON body to send with the request",
@@ -798,9 +798,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_calculations"
+					"offers_post_offers_calculations"
 				],
-				"bodyInputMode_offers_post_api_offers_calculations": [
+				"bodyInputMode_offers_post_offers_calculations": [
 					"json"
 				]
 			}
@@ -813,7 +813,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "Body Input Mode",
-		"name": "bodyInputMode_offers_post_api_offers_rfq",
+		"name": "bodyInputMode_offers_post_offers_rfq",
 		"type": "options",
 		"default": "fields",
 		"description": "Choose how to provide the request body",
@@ -833,7 +833,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq"
+					"offers_post_offers_rfq"
 				]
 			}
 		}
@@ -1127,9 +1127,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq"
+					"offers_post_offers_rfq"
 				],
-				"bodyInputMode_offers_post_api_offers_rfq": [
+				"bodyInputMode_offers_post_offers_rfq": [
 					"fields"
 				]
 			}
@@ -1137,7 +1137,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "JSON Body",
-		"name": "jsonBody_offers_post_api_offers_rfq",
+		"name": "jsonBody_offers_post_offers_rfq",
 		"type": "json",
 		"default": "{}",
 		"description": "Raw JSON body to send with the request",
@@ -1150,9 +1150,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq"
+					"offers_post_offers_rfq"
 				],
-				"bodyInputMode_offers_post_api_offers_rfq": [
+				"bodyInputMode_offers_post_offers_rfq": [
 					"json"
 				]
 			}
@@ -1182,14 +1182,14 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_extract"
+					"offers_post_offers_rfq_extract"
 				]
 			}
 		}
 	},
 	{
 		"displayName": "Body Input Mode",
-		"name": "bodyInputMode_offers_post_api_offers_rfq_extract_charges",
+		"name": "bodyInputMode_offers_post_offers_rfq_extract_charges",
 		"type": "options",
 		"default": "fields",
 		"description": "Choose how to provide the request body",
@@ -1209,7 +1209,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_extract_charges"
+					"offers_post_offers_rfq_extract_charges"
 				]
 			}
 		}
@@ -1256,9 +1256,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_extract_charges"
+					"offers_post_offers_rfq_extract_charges"
 				],
-				"bodyInputMode_offers_post_api_offers_rfq_extract_charges": [
+				"bodyInputMode_offers_post_offers_rfq_extract_charges": [
 					"fields"
 				]
 			}
@@ -1266,7 +1266,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "JSON Body",
-		"name": "jsonBody_offers_post_api_offers_rfq_extract_charges",
+		"name": "jsonBody_offers_post_offers_rfq_extract_charges",
 		"type": "json",
 		"default": "{}",
 		"description": "Raw JSON body to send with the request",
@@ -1279,9 +1279,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_extract_charges"
+					"offers_post_offers_rfq_extract_charges"
 				],
-				"bodyInputMode_offers_post_api_offers_rfq_extract_charges": [
+				"bodyInputMode_offers_post_offers_rfq_extract_charges": [
 					"json"
 				]
 			}
@@ -1294,7 +1294,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "Body Input Mode",
-		"name": "bodyInputMode_offers_post_api_offers_rfq_from_email",
+		"name": "bodyInputMode_offers_post_offers_rfq_from_email",
 		"type": "options",
 		"default": "fields",
 		"description": "Choose how to provide the request body",
@@ -1314,7 +1314,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_from_email"
+					"offers_post_offers_rfq_from_email"
 				]
 			}
 		}
@@ -1375,9 +1375,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_from_email"
+					"offers_post_offers_rfq_from_email"
 				],
-				"bodyInputMode_offers_post_api_offers_rfq_from_email": [
+				"bodyInputMode_offers_post_offers_rfq_from_email": [
 					"fields"
 				]
 			}
@@ -1385,7 +1385,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "JSON Body",
-		"name": "jsonBody_offers_post_api_offers_rfq_from_email",
+		"name": "jsonBody_offers_post_offers_rfq_from_email",
 		"type": "json",
 		"default": "{}",
 		"description": "Raw JSON body to send with the request",
@@ -1398,9 +1398,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_post_api_offers_rfq_from_email"
+					"offers_post_offers_rfq_from_email"
 				],
-				"bodyInputMode_offers_post_api_offers_rfq_from_email": [
+				"bodyInputMode_offers_post_offers_rfq_from_email": [
 					"json"
 				]
 			}
@@ -1423,14 +1423,14 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_put_api_offers_rfq_id"
+					"offers_put_offers_rfq_id"
 				]
 			}
 		}
 	},
 	{
 		"displayName": "Body Input Mode",
-		"name": "bodyInputMode_offers_put_api_offers_rfq_id",
+		"name": "bodyInputMode_offers_put_offers_rfq_id",
 		"type": "options",
 		"default": "fields",
 		"description": "Choose how to provide the request body",
@@ -1450,7 +1450,7 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_put_api_offers_rfq_id"
+					"offers_put_offers_rfq_id"
 				]
 			}
 		}
@@ -1744,9 +1744,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_put_api_offers_rfq_id"
+					"offers_put_offers_rfq_id"
 				],
-				"bodyInputMode_offers_put_api_offers_rfq_id": [
+				"bodyInputMode_offers_put_offers_rfq_id": [
 					"fields"
 				]
 			}
@@ -1754,7 +1754,7 @@ const properties: INodeProperties[] = [
 	},
 	{
 		"displayName": "JSON Body",
-		"name": "jsonBody_offers_put_api_offers_rfq_id",
+		"name": "jsonBody_offers_put_offers_rfq_id",
 		"type": "json",
 		"default": "{}",
 		"description": "Raw JSON body to send with the request",
@@ -1767,9 +1767,9 @@ const properties: INodeProperties[] = [
 					"FMS Offers"
 				],
 				"operation": [
-					"offers_put_api_offers_rfq_id"
+					"offers_put_offers_rfq_id"
 				],
-				"bodyInputMode_offers_put_api_offers_rfq_id": [
+				"bodyInputMode_offers_put_offers_rfq_id": [
 					"json"
 				]
 			}
@@ -1792,7 +1792,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_delete_api_freight_documents_documents_id"
+					"freight_documents_delete_freight_documents_documents_id"
 				]
 			}
 		}
@@ -1809,7 +1809,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id"
+					"freight_documents_get_freight_documents_documents_id"
 				]
 			}
 		}
@@ -1826,7 +1826,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id_download"
+					"freight_documents_get_freight_documents_documents_id_download"
 				]
 			}
 		}
@@ -1843,7 +1843,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id_extract"
+					"freight_documents_get_freight_documents_documents_id_extract"
 				]
 			}
 		}
@@ -1860,7 +1860,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id_pages"
+					"freight_documents_get_freight_documents_documents_id_pages"
 				]
 			}
 		}
@@ -1877,7 +1877,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id_pages_pageNum_image"
+					"freight_documents_get_freight_documents_documents_id_pages_pageNum_image"
 				]
 			}
 		}
@@ -1894,7 +1894,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id_pages_pageNum_image"
+					"freight_documents_get_freight_documents_documents_id_pages_pageNum_image"
 				]
 			}
 		}
@@ -1911,7 +1911,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_get_api_freight_documents_documents_id_sections"
+					"freight_documents_get_freight_documents_documents_id_sections"
 				]
 			}
 		}
@@ -1928,7 +1928,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_patch_api_freight_documents_documents_id"
+					"freight_documents_patch_freight_documents_documents_id"
 				]
 			}
 		}
@@ -1945,7 +1945,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_patch_api_freight_documents_documents_id_sections_sectionId"
+					"freight_documents_patch_freight_documents_documents_id_sections_sectionId"
 				]
 			}
 		}
@@ -1962,7 +1962,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_patch_api_freight_documents_documents_id_sections_sectionId"
+					"freight_documents_patch_freight_documents_documents_id_sections_sectionId"
 				]
 			}
 		}
@@ -1979,7 +1979,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_documents_id_extract"
+					"freight_documents_post_freight_documents_documents_id_extract"
 				]
 			}
 		}
@@ -1996,7 +1996,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_documents_id_feedback"
+					"freight_documents_post_freight_documents_documents_id_feedback"
 				]
 			}
 		}
@@ -2013,7 +2013,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_documents_id_link"
+					"freight_documents_post_freight_documents_documents_id_link"
 				]
 			}
 		}
@@ -2030,7 +2030,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_documents_id_sections_sectionId_set_label"
+					"freight_documents_post_freight_documents_documents_id_sections_sectionId_set_label"
 				]
 			}
 		}
@@ -2047,7 +2047,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_documents_id_sections_sectionId_set_label"
+					"freight_documents_post_freight_documents_documents_id_sections_sectionId_set_label"
 				]
 			}
 		}
@@ -2064,7 +2064,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_documents_id_unlink"
+					"freight_documents_post_freight_documents_documents_id_unlink"
 				]
 			}
 		}
@@ -2088,7 +2088,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_upload"
+					"freight_documents_post_freight_documents_upload"
 				]
 			}
 		}
@@ -2112,7 +2112,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_upload"
+					"freight_documents_post_freight_documents_upload"
 				]
 			}
 		}
@@ -2159,7 +2159,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_post_api_freight_documents_upload"
+					"freight_documents_post_freight_documents_upload"
 				]
 			}
 		}
@@ -2176,7 +2176,7 @@ const properties: INodeProperties[] = [
 					"Freight Documents"
 				],
 				"operation": [
-					"freight_documents_put_api_freight_documents_documents_id"
+					"freight_documents_put_freight_documents_documents_id"
 				]
 			}
 		}

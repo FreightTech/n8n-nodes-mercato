@@ -200,6 +200,45 @@ function preprocessSpec(): void {
 		}
 	}
 
+	// 0y. Strip a leading /api/ prefix from spec paths and the matching
+	// `_api_` segment from operationIds. Different OpenAPI publishers
+	// describe the same Mercato API with paths in two shapes — the
+	// runtime endpoint absorbs /api into servers[0].url and emits
+	// /freight_documents/upload, while the static `mercato generate`
+	// preserves the filesystem path /api/freight_documents/upload (and
+	// builds operationId off it: freight_documents_post_api_freight_documents_upload).
+	// The n8n node's requestDefaults already appends /api to
+	// credentials.baseUrl, so we want both routing URLs and operation
+	// values to drop the api segment regardless of spec source.
+	{
+		let stripped = 0;
+		const newPaths: Record<string, unknown> = {};
+		for (const [pathKey, pathValue] of Object.entries(spec.paths || {})) {
+			let newKey = pathKey;
+			if (pathKey.startsWith('/api/')) {
+				newKey = pathKey.slice(4);
+				stripped++;
+			} else if (pathKey === '/api') {
+				newKey = '/';
+				stripped++;
+			}
+			const obj = pathValue as Record<string, unknown>;
+			for (const methodValue of Object.values(obj)) {
+				if (!methodValue || typeof methodValue !== 'object') continue;
+				const op = methodValue as Record<string, unknown>;
+				const opId = op.operationId as string | undefined;
+				if (typeof opId === 'string') {
+					op.operationId = opId.replace(/_(post|get|put|patch|delete)_api_/, '_$1_');
+				}
+			}
+			newPaths[newKey] = pathValue;
+		}
+		spec.paths = newPaths;
+		if (stripped > 0) {
+			console.log(`  Stripped /api/ prefix from ${stripped} paths (and matching operationIds)`);
+		}
+	}
+
 	// 0a. Filter paths by tag if --filter is provided
 	if (FILTER_PATTERNS.length > 0) {
 		console.log(`  Filtering endpoints by tags matching: ${FILTER_PATTERNS.join(', ')}`);
@@ -323,7 +362,7 @@ function removePathPrefix(obj: unknown): unknown {
  * These are handled by uploadPreSend.ts at runtime, so we skip JSON body mode for them.
  */
 const UPLOAD_OPERATIONS = new Set([
-	'freight_documents_post_api_freight_documents_upload',
+	'freight_documents_post_freight_documents_upload',
 ]);
 
 /**
