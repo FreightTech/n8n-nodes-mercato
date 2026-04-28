@@ -336,6 +336,9 @@ npm run generate:openapi
 
 # Force re-download the spec and regenerate
 npm run generate:openapi -- --download
+
+# Point different instance, filter module
+npm run generate:openapi -- --url https://fms.infshipping.freighttech.org/api/docs/openapi --filter "fms"
 ```
 
 This will:
