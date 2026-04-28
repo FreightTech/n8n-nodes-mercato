@@ -37,6 +37,14 @@ function getFilterPatterns(): string[] {
 const SPEC_URL = getSpecUrl();
 const FILTER_PATTERNS = getFilterPatterns();
 
+// Workaround for upstream tag drift. Some endpoints carry an old module tag
+// (e.g. "FMS Documents") while the rest of the module migrated to a new tag
+// ("Freight Documents"). Rewriting here groups orphan operations under their
+// canonical Resource so they remain reachable from the n8n UI.
+const TAG_REWRITES: Record<string, string> = {
+	'FMS Documents': 'Freight Documents',
+};
+
 async function downloadSpec(): Promise<void> {
 	console.log(`Downloading OpenAPI spec from ${SPEC_URL}...`);
 	const response = await fetch(SPEC_URL);
@@ -158,6 +166,39 @@ function simplifyAnyOf(spec: Record<string, unknown>, obj: unknown): unknown {
 function preprocessSpec(): void {
 	console.log('Pre-processing spec...');
 	const spec = JSON.parse(fs.readFileSync(SPEC_PATH, 'utf-8'));
+
+	// 0z. Normalize tags: rewrite legacy/stray tags to their canonical name so
+	// orphan operations group with their siblings under one Resource.
+	if (Object.keys(TAG_REWRITES).length > 0) {
+		const rewriteTag = (t: string): string => TAG_REWRITES[t] ?? t;
+		let rewriteCount = 0;
+		if (Array.isArray(spec.tags)) {
+			spec.tags = (spec.tags as Array<Record<string, unknown>>).map((t) => {
+				const name = t.name as string;
+				if (TAG_REWRITES[name]) {
+					rewriteCount++;
+					return { ...t, name: TAG_REWRITES[name] };
+				}
+				return t;
+			});
+		}
+		for (const pathValue of Object.values(spec.paths || {})) {
+			const pathObj = pathValue as Record<string, unknown>;
+			for (const methodValue of Object.values(pathObj)) {
+				if (!methodValue || typeof methodValue !== 'object') continue;
+				const op = methodValue as Record<string, unknown>;
+				if (Array.isArray(op.tags)) {
+					const before = op.tags as string[];
+					const after = before.map(rewriteTag);
+					if (before.some((t, i) => t !== after[i])) rewriteCount++;
+					op.tags = after;
+				}
+			}
+		}
+		if (rewriteCount > 0) {
+			console.log(`  Rewrote ${rewriteCount} legacy tag references`);
+		}
+	}
 
 	// 0a. Filter paths by tag if --filter is provided
 	if (FILTER_PATTERNS.length > 0) {
@@ -282,8 +323,7 @@ function removePathPrefix(obj: unknown): unknown {
  * These are handled by uploadPreSend.ts at runtime, so we skip JSON body mode for them.
  */
 const UPLOAD_OPERATIONS = new Set([
-	'fms_documents_post_fms_documents_upload',
-	'fms_documents_post_fms_documents_invoices_upload',
+	'freight_documents_post_api_freight_documents_upload',
 ]);
 
 /**
