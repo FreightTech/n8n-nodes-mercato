@@ -7,6 +7,7 @@ import type { IHttpRequestOptions, INodeProperties } from 'n8n-workflow';
 const UPLOAD_OPERATIONS = [
 	'fms_documents_post_fms_documents_upload',
 	'fms_documents_post_fms_documents_invoices_upload',
+	'freight_documents_post_freight_documents_upload',
 ];
 
 /**
