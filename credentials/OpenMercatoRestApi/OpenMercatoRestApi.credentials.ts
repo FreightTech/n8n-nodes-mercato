@@ -45,8 +45,8 @@ export class OpenMercatoRestApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials.baseUrl}}',
-			url: '/api/api_keys/keys',
+			baseURL: '={{$credentials.baseUrl}}/api',
+			url: '/api_keys/keys',
 			method: 'GET',
 		},
 	};
